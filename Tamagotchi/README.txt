@@ -1,0 +1,5 @@
+Progetto TAMAGOTCHI da parte di Brando Calderara, matr. 746352, consegna individuale.
+
+Creato con IntelliJ IDEA 2024.1		java 21 SDK
+
+Comprende: diagramma UML e commenti javadoc(documentazione già generata) 
