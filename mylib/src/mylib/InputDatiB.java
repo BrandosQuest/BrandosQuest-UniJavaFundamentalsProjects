@@ -60,12 +60,13 @@ public class InputDatiB
 	 *
 	 * @return the int entered by the user
 	 */
-	public static int nextInt(int min, int max){
+	public static int nextInt(int min, int max, String message){
 		int r= 0;
 		boolean error=false;
 		boolean OutOfRange=false;
 		int tries=0;
 		do {
+			System.out.println(message);
 			try {
 				r = scanner.nextInt();
 				error=false;
