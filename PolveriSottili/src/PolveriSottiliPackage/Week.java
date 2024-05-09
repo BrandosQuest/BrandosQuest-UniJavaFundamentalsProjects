@@ -1,5 +1,6 @@
 package PolveriSottiliPackage;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -52,5 +53,14 @@ public class Week {
 
     public void setDustLevels(int[] dustLevels) {
         this.dustLevels = dustLevels;
+    }
+
+    @Override
+    public String toString() {
+        return "Week{" +
+                "year=" + year +
+                ", weekNumber=" + weekNumber +
+                ", dustLevels=" + Arrays.toString(dustLevels) +
+                '}';
     }
 }
