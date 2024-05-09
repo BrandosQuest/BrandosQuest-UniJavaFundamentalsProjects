@@ -19,7 +19,9 @@ public class Main {
         menu.printMenu();
         int choice= InputDatiB.nextInt();
         while (choice!=1){
-            //Week week = new Week(InputDatiB.nextInt(1799, "input the year of the week considered"))
+            Week week = new Week(InputDatiB.nextInt(1799, "input the year of the week considered"),
+                    InputDatiB.nextInt(1, 53),
+                    InputDatiB.nextIntArray(7, "Input a dust particle value as an integer for 7 days"));
             System.out.println();
             menu.printMenu();
             choice= InputDatiB.nextInt();
