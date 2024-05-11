@@ -51,6 +51,17 @@ public class MenuB
         }
         System.out.println("--"+title.toUpperCase());
     }
+    /**
+     * The print of the menu Plus Quit
+     */
+    public void printMenuPlusQuit(){
+        System.out.println("--"+title.toUpperCase());
+        for (int i = 0; i < options.size(); i++) {
+            System.out.println(i+1+") "+options.get(i));
+        }
+        System.out.println(0+") "+"Quit");
+        System.out.println("--"+title.toUpperCase());
+    }
  /* final private static String CORNICE = "--------------------------------";
   final private static String VOCE_USCITA = "0\tEsci";
   final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata > ";

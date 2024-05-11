@@ -15,12 +15,12 @@ public class Main {
      * @param args the parameters of the main method, where the execution starts
      */
     public static void main(String[] args) {
-        MenuB menu = new MenuB("Fine dust sensor application", new String[]{"quit", "evaluate a new week"});
-        menu.printMenu();
+        MenuB menu = new MenuB("Fine dust sensor application", new String[]{"evaluate a new week"});
+        menu.printMenuPlusQuit();
 
         int choice= InputDatiB.nextInt();
 
-        while (choice!=1){
+        while (choice!=0){
             Week week = new Week(InputDatiB.nextInt(1800, "input the year of the week considered(after 1800)"),
                     InputDatiB.nextInt(1, 53, "input the number of the week considered, between 1 and 53"),
                     InputDatiB.nextIntArray(7, "Input a dust particle value as an µg/m^3 integer for 7 days"));
@@ -28,7 +28,7 @@ public class Main {
 
             checkWeekDustLevels(week);
 
-            menu.printMenu();
+            menu.printMenuPlusQuit();
             choice= InputDatiB.nextInt();
         }
 
