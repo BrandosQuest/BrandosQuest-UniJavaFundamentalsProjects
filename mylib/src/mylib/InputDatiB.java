@@ -60,8 +60,8 @@ public class InputDatiB
 	 *
 	 * @return the int entered by the user
 	 */
-	public static int nextInt(int min, int max, String message){
-		int r= 0;
+	public static Integer nextInt(int min, int max, String message){
+		Integer r= null;
 		boolean error=false;
 		boolean OutOfRange=false;
 		int tries=0;
@@ -70,6 +70,12 @@ public class InputDatiB
 			try {
 				r = scanner.nextInt();
 				error=false;
+				if(r<min || r>max){
+					OutOfRange=true;
+					System.out.println(BADINPUTMESSAGE);
+				}else {
+					OutOfRange=false;
+				}
 			} catch (Exception e) {
 				System.out.println(BADINPUTMESSAGE);
 				scanner.next();
@@ -77,17 +83,16 @@ public class InputDatiB
 
 			}
 
-			if(r<min || r>max){
-				OutOfRange=true;
-				System.out.println(BADINPUTMESSAGE);
-			}else {
-				OutOfRange=false;
-			}
+
 
 			tries++;
 
 			//} while (error && tries<3 && OutOfRange);
 		} while ((error || OutOfRange) &&  tries<3);
+
+		if (r==null){
+			return min;
+		}
 		return r;
 	}
 	/**
@@ -98,8 +103,8 @@ public class InputDatiB
 	 *
 	 * @return the int entered by the user
 	 */
-	public static int nextInt(int min, String message){
-		int r= 0;
+	public static Integer nextInt(int min, String message){
+		Integer r= null;
 		boolean error=false;
 		boolean OutOfRange=false;
 		int tries=0;
@@ -108,6 +113,12 @@ public class InputDatiB
 			try {
 				r = scanner.nextInt();
 				error=false;
+				if(r<min){
+					OutOfRange=true;
+					System.out.println(BADINPUTMESSAGE);
+				}else {
+					OutOfRange=false;
+				}
 			} catch (Exception e) {
 				System.out.println(BADINPUTMESSAGE);
 				scanner.next();
@@ -115,17 +126,15 @@ public class InputDatiB
 
 			}
 
-			if(r<min){
-				OutOfRange=true;
-				System.out.println(BADINPUTMESSAGE);
-			}else {
-				OutOfRange=false;
-			}
 
 			tries++;
 
 			//} while (error && tries<3 && OutOfRange);
 		} while ((error || OutOfRange) &&  tries<3);
+
+		if (r==null){
+			return min;
+		}
 		return r;
 	}
 	/**

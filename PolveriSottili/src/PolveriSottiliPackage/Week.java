@@ -14,7 +14,7 @@ public class Week {
     private int[] dustLevels;
 
     public Week(int year, int weekNumber, int[] dustLevels) throws IllegalArgumentException{
-        if (year>1800) {
+        if (year>=1800) {
             this.year = year;
         } else {
             throw new IllegalArgumentException("Year must be set to after 1800 AD");
