@@ -55,6 +55,24 @@ public class Week {
         this.dustLevels = dustLevels;
     }
 
+    public int getMaxDustLevel() {
+        int maxDustLevel = 0;
+        for (int dustLevel : dustLevels) {
+            if (dustLevel > maxDustLevel) {
+                maxDustLevel = dustLevel;
+            }
+        }
+        return maxDustLevel;
+    }
+
+    public int getMeanDustLevel() {
+        int meanDustLevel = 0;
+        for (int dustLevel : dustLevels) {
+            meanDustLevel += dustLevel;
+        }
+        return meanDustLevel/dustLevels.length;
+    }
+
     @Override
     public String toString() {
         return "Week{" +
