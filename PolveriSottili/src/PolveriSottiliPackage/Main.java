@@ -23,11 +23,12 @@ public class Main {
         while (choice!=0){
             Week week = new Week(InputDatiB.nextInt(1800, "input the year of the week considered(after 1800)"),
                     InputDatiB.nextInt(1, 53, "input the number of the week considered, between 1 and 53"),
-                    InputDatiB.nextIntArray(7, "Input a dust particle value as an µg/m^3 integer for 7 days"));
+                    InputDatiB.nextPositiveIntArray(7, "Input a dust particle value as an µg/m^3 integer for 7 days"));
             System.out.println(week.toString());
 
             checkWeekDustLevels(week);
 
+            System.out.println();
             menu.printMenuPlusQuit();
             choice= InputDatiB.nextInt();
         }

@@ -75,10 +75,10 @@ public class Week {
 
     @Override
     public String toString() {
-        return "Week{" +
+        return "---------\nWeek{" +
                 "year=" + year +
                 ", weekNumber=" + weekNumber +
                 ", dustLevels=" + Arrays.toString(dustLevels) +
-                '}';
+                "}\n---------";
     }
 }

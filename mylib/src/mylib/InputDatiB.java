@@ -148,7 +148,6 @@ public class InputDatiB
 	public static int[] nextIntArray(int length, String message){
 		System.out.println(message);
 		int[] array= new int[length];
-		boolean oneValueSkipped=false;
 
 		for (int i = 0; i < length; i++) {
 			boolean error=false;
@@ -172,6 +171,46 @@ public class InputDatiB
 		return array;
 	}
 
+	/**
+	 * Method used to ask the user for a positive int array
+	 *
+	 * @param length the length of the required array
+	 * @param message the message displayed to the user
+	 *
+	 * @return the int array entered by the user
+	 */
+	public static int[] nextPositiveIntArray(int length, String message){
+		System.out.println(message);
+		int[] array= new int[length];
+		boolean OutOfRange=false;
+
+		for (int i = 0; i < length; i++) {
+			boolean error=false;
+			int tries=0;
+			do {
+				System.out.print("Enter the "+(i+1)+" integer: ");
+				try {
+					array[i] = scanner.nextInt();
+					error=false;
+					if(array[i]<0){
+						OutOfRange=true;
+						System.out.println(BADINPUTMESSAGE);
+					}else {
+						OutOfRange=false;
+					}
+				} catch (Exception e) {
+					System.out.println(BADINPUTMESSAGE);
+					scanner.next();
+					error=true;
+				}
+				tries++;
+			} while ((error || OutOfRange) &&  tries<3);
+			/*if (error){
+				oneValueSkipped=true;			for when a single value is not added
+			}*/
+		}
+		return array;
+	}
 	/**
 	 * Method used to ask the user for a String
 	 *
