@@ -27,7 +27,7 @@ public class Main {
                         InputDatiB.nextPositiveIntArray(7, "Input a dust particle value as an µg/m^3 integer for 7 days"));
                 System.out.println(week);
 
-                checkWeekDustLevels(week);
+                week.checkWeekDustLevels();
 
                 System.out.println();
                 menu.printMenuPlusQuit();
@@ -35,14 +35,6 @@ public class Main {
                 System.out.println("Not an option, try again");
             }
             choice= InputDatiB.nextInt(-1);
-        }
-    }
-    private static void checkWeekDustLevels(Week week){
-        if(week.getMaxDustLevel()>=75){
-            System.out.println("Warning: found highest value of fine dust particle of "+week.getMaxDustLevel()+" because it was higher than 75 µg/m^3");
-        }
-        if(week.getMeanDustLevel()>=50){
-            System.out.println("Warning: mean of fine dust particle in the week exceeds 50 µg/m^3 at the value of "+week.getMeanDustLevel());
         }
     }
 }

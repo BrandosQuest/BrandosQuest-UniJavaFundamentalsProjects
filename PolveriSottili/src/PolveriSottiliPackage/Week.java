@@ -54,7 +54,7 @@ public class Week {
         this.dustLevels = dustLevels;
     }
 
-    public int getMaxDustLevel() {
+    private int getMaxDustLevel() {
         int maxDustLevel = 0;
         for (int dustLevel : dustLevels) {
             if (dustLevel > maxDustLevel) {
@@ -64,12 +64,31 @@ public class Week {
         return maxDustLevel;
     }
 
-    public int getMeanDustLevel() {
+    private int getMeanDustLevel() {
         int meanDustLevel = 0;
         for (int dustLevel : dustLevels) {
             meanDustLevel += dustLevel;
         }
         return meanDustLevel/dustLevels.length;
+    }
+
+    public void checkWeekDustLevels(){
+        MaxDustLevelOutOfBound();
+        MeanDustLevelOutOfBound();
+    }
+    public boolean MaxDustLevelOutOfBound(){
+        if(getMaxDustLevel()>=75){
+            System.out.println("Warning: found highest value of fine dust particle of "+getMaxDustLevel()+" because it was higher than 75 µg/m^3");
+         return true;
+        }
+        return false;
+    }
+    public boolean MeanDustLevelOutOfBound(){
+        if(getMeanDustLevel()>=50){
+            System.out.println("Warning: mean of fine dust particle in the week exceeds 50 µg/m^3 at the value of "+getMeanDustLevel());
+            return true;
+        }
+        return false;
     }
 
     @Override
