@@ -39,7 +39,7 @@ public class Main {
     }
     private static void checkWeekDustLevels(Week week){
         if(week.getMaxDustLevel()>=75){
-            System.out.println("Warning: found highest value of fine dust particle of "+week.getMaxDustLevel());
+            System.out.println("Warning: found highest value of fine dust particle of "+week.getMaxDustLevel()+" because it was higher than 75 µg/m^3");
         }
         if(week.getMeanDustLevel()>=50){
             System.out.println("Warning: mean of fine dust particle in the week exceeds 50 µg/m^3 at the value of "+week.getMeanDustLevel());

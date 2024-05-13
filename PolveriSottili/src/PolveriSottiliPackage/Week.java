@@ -1,7 +1,6 @@
 package PolveriSottiliPackage;
 
 import java.util.Arrays;
-import java.util.Date;
 
 /**
  * Class used to represent a week and its fine dust levels for every day
