@@ -67,6 +67,7 @@ public class InputDatiB
 		int tries=0;
 		do {
 			System.out.println(message);
+			r=null;
 			try {
 				r = scanner.nextInt();
 				error=false;
@@ -110,6 +111,7 @@ public class InputDatiB
 		int tries=0;
 		do {
 			System.out.println(message);
+			r=null;
 			try {
 				r = scanner.nextInt();
 				error=false;
@@ -188,7 +190,7 @@ public class InputDatiB
 			boolean error=false;
 			int tries=0;
 			do {
-				System.out.print("Enter the "+(i+1)+" integer: ");
+				System.out.print("Enter the "+(i+1)+"° integer: ");
 				try {
 					array[i] = scanner.nextInt();
 					error=false;
