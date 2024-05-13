@@ -34,7 +34,7 @@ public class InputDatiB
 	 *
 	 * @return the int entered by the user
 	 */
-	public static int nextInt(){
+	public static int nextInt(int defaultValue){
 		int r= 0;
 		boolean error=false;
 		int tries=0;
@@ -49,6 +49,9 @@ public class InputDatiB
 				tries++;
 			}
 		} while (error && tries<3);
+		if(tries==3){
+			return defaultValue;
+		}
 		return r;
 	}
 
@@ -91,7 +94,8 @@ public class InputDatiB
 			//} while (error && tries<3 && OutOfRange);
 		} while ((error || OutOfRange) &&  tries<3);
 
-		if (r==null){
+		if (tries==3){
+			System.out.println("WARNING: OUT OF TRIES, VALUE SET TO SMALLEST OPTION: "+min);
 			return min;
 		}
 		return r;
@@ -134,7 +138,8 @@ public class InputDatiB
 			//} while (error && tries<3 && OutOfRange);
 		} while ((error || OutOfRange) &&  tries<3);
 
-		if (r==null){
+		if (tries==3){
+			System.out.println("WARNING: OUT OF TRIES, VALUE SET TO SMALLEST OPTION: "+min);
 			return min;
 		}
 		return r;
@@ -166,9 +171,10 @@ public class InputDatiB
 				}
 				tries++;
 			} while (error &&  tries<3);
-			/*if (error){
-				oneValueSkipped=true;			for when a single value is not added
-			}*/
+			if (tries==3){
+				System.out.println("WARNING: OUT OF TRIES, VALUE SET TO DEFAULT OPTION: "+0);
+				array[i]=0;
+			}
 		}
 		return array;
 	}
@@ -207,9 +213,10 @@ public class InputDatiB
 				}
 				tries++;
 			} while ((error || OutOfRange) &&  tries<3);
-			/*if (error){
-				oneValueSkipped=true;			for when a single value is not added
-			}*/
+			if (tries==3){
+				System.out.println("WARNING: OUT OF TRIES, VALUE SET TO DEFAULT OPTION: "+0);
+				array[i]=0;
+			}
 		}
 		return array;
 	}

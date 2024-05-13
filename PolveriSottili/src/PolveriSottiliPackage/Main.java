@@ -18,7 +18,7 @@ public class Main {
         MenuB menu = new MenuB("Fine dust sensor application", new String[]{"evaluate a new week"});
         menu.printMenuPlusQuit();
 
-        int choice= InputDatiB.nextInt();
+        int choice= InputDatiB.nextInt(-1);
 
         while (choice!=0){
             if (choice == 1){
@@ -32,9 +32,9 @@ public class Main {
                 System.out.println();
                 menu.printMenuPlusQuit();
             }else {
-                System.out.println("Wrong choice, try again");
+                System.out.println("Not an option, try again");
             }
-            choice= InputDatiB.nextInt();
+            choice= InputDatiB.nextInt(-1);
         }
     }
     private static void checkWeekDustLevels(Week week){
