@@ -21,19 +21,21 @@ public class Main {
         int choice= InputDatiB.nextInt();
 
         while (choice!=0){
-            Week week = new Week(InputDatiB.nextInt(1800, "input the year of the week considered(after 1800)"),
-                    InputDatiB.nextInt(1, 53, "input the number of the week considered, between 1 and 53"),
-                    InputDatiB.nextPositiveIntArray(7, "Input a dust particle value as an µg/m^3 integer for 7 days"));
-            System.out.println(week.toString());
+            if (choice == 1){
+                Week week = new Week(InputDatiB.nextInt(1800, "input the year of the week considered(after 1800)"),
+                        InputDatiB.nextInt(1, 53, "input the number of the week considered, between 1 and 53"),
+                        InputDatiB.nextPositiveIntArray(7, "Input a dust particle value as an µg/m^3 integer for 7 days"));
+                System.out.println(week);
 
-            checkWeekDustLevels(week);
+                checkWeekDustLevels(week);
 
-            System.out.println();
-            menu.printMenuPlusQuit();
+                System.out.println();
+                menu.printMenuPlusQuit();
+            }else {
+                System.out.println("Wrong choice, try again");
+            }
             choice= InputDatiB.nextInt();
         }
-
-
     }
     private static void checkWeekDustLevels(Week week){
         if(week.getMaxDustLevel()>=75){
