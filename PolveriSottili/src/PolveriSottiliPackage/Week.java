@@ -46,30 +46,6 @@ public class Week {
         }
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getWeekNumber() {
-        return weekNumber;
-    }
-
-    public void setWeekNumber(int weekNumber) {
-        this.weekNumber = weekNumber;
-    }
-
-    public int[] getDustLevels() {
-        return dustLevels;
-    }
-
-    public void setDustLevels(int[] dustLevels) {
-        this.dustLevels = dustLevels;
-    }
-
     /**
      * @return the highest value of fine dust level in the week
      */
