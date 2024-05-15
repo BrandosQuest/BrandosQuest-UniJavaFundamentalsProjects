@@ -5,6 +5,11 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test class for the Polveri Sottili project, made under the directions of the guide
+ *
+ * @author Brando
+ */
 public class TestPolveriSottili {
 
     @Test

@@ -52,7 +52,7 @@ public class MenuB
         System.out.println("--"+title.toUpperCase());
     }
     /**
-     * The print of the menu Plus Quit
+     * The print of the menu Plus Quit option
      */
     public void printMenuPlusQuit(){
         System.out.println("--"+title.toUpperCase());

@@ -30,9 +30,10 @@ public class InputDatiB
 	private static final String BADINPUTMESSAGE= "The input provided is not acceptable, try again";
 
 	/**
-	 * Method used to ask the user for a generic int
+	 * Method used to ask the user for a generic int, 3 tries, it checks for errors in the conversion to int
 	 *
-	 * @return the int entered by the user
+	 * @param defaultValue the value returned in case of a fail in getting the right input
+	 * @return the int entered by the user or the default value in case of a fail
 	 */
 	public static int nextInt(int defaultValue){
 		int r= 0;
@@ -56,18 +57,20 @@ public class InputDatiB
 	}
 
 	/**
-	 * Method used to ask the user for an int between two values
+	 * Method used to ask the user for an int between two values, 3 tries, it checks for errors in the conversion to int
 	 *
 	 * @param min the lowest value of the interval accepted
 	 * @param max the highest value of the interval accepted
+	 * @param message The message to be displayed to the user
 	 *
-	 * @return the int entered by the user
+	 * @return the int entered by the user or the lowest value in case of a fail
 	 */
 	public static Integer nextInt(int min, int max, String message){
 		Integer r= null;
 		boolean error=false;
 		boolean OutOfRange=false;
 		int tries=0;
+
 		do {
 			System.out.println(message);
 			r=null;
@@ -84,35 +87,31 @@ public class InputDatiB
 				System.out.println(BADINPUTMESSAGE);
 				scanner.next();
 				error=true;
-
 			}
-
-
-
 			tries++;
-
-			//} while (error && tries<3 && OutOfRange);
 		} while ((error || OutOfRange) &&  tries<3);
 
 		if (tries==3){
 			System.out.println("WARNING: OUT OF TRIES, VALUE SET TO SMALLEST OPTION: "+min);
 			return min;
 		}
+
 		return r;
 	}
 	/**
-	 * Method used to ask the user for an int bigger than a value
+	 * Method used to ask the user for an int bigger than a value, 3 tries, it checks for errors in the conversion to int
 	 *
 	 * @param min the lowest value of the interval accepted
 	 * @param message the message displayed to the user
 	 *
-	 * @return the int entered by the user
+	 * @return the int entered by the user or the lowest value in case of a fail
 	 */
 	public static Integer nextInt(int min, String message){
 		Integer r= null;
 		boolean error=false;
 		boolean OutOfRange=false;
 		int tries=0;
+
 		do {
 			System.out.println(message);
 			r=null;
@@ -129,13 +128,8 @@ public class InputDatiB
 				System.out.println(BADINPUTMESSAGE);
 				scanner.next();
 				error=true;
-
 			}
-
-
 			tries++;
-
-			//} while (error && tries<3 && OutOfRange);
 		} while ((error || OutOfRange) &&  tries<3);
 
 		if (tries==3){
@@ -180,12 +174,12 @@ public class InputDatiB
 	}
 
 	/**
-	 * Method used to ask the user for a positive int array
+	 * Method used to ask the user for an int array of positive numbers
 	 *
 	 * @param length the length of the required array
 	 * @param message the message displayed to the user
 	 *
-	 * @return the int array entered by the user
+	 * @return the int array entered by the user or 0 in the position in witch there's been a fail
 	 */
 	public static int[] nextPositiveIntArray(int length, String message){
 		System.out.println(message);
