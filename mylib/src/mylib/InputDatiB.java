@@ -99,6 +99,46 @@ public class InputDatiB
 		return r;
 	}
 	/**
+	 * Method used to ask the user for an int between two values, 3 tries, it checks for errors in the conversion to int
+	 *
+	 * @param min the lowest value of the interval accepted
+	 * @param max the highest value of the interval accepted
+	 *
+	 * @return the int entered by the user or the lowest value in case of a fail
+	 */
+	public static Integer nextInt(int min, int max){
+		Integer r= null;
+		boolean error=false;
+		boolean OutOfRange=false;
+		int tries=0;
+
+		do {
+			r=null;
+			try {
+				r = scanner.nextInt();
+				error=false;
+				if(r<min || r>max){
+					OutOfRange=true;
+					System.out.println(BADINPUTMESSAGE);
+				}else {
+					OutOfRange=false;
+				}
+			} catch (Exception e) {
+				System.out.println(BADINPUTMESSAGE);
+				scanner.next();
+				error=true;
+			}
+			tries++;
+		} while ((error || OutOfRange) &&  tries<3);
+
+		if (tries==3){
+			System.out.println("WARNING: OUT OF TRIES, VALUE SET TO SMALLEST OPTION: "+min);
+			return min;
+		}
+
+		return r;
+	}
+	/**
 	 * Method used to ask the user for an int bigger than a value, 3 tries, it checks for errors in the conversion to int
 	 *
 	 * @param min the lowest value of the interval accepted
