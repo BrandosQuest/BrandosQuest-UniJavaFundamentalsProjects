@@ -262,6 +262,15 @@ public class InputDatiB
 	public static String nextString(){
 		return scanner.next();
 	}
+	/**
+	 * Method used to ask the user for a String after displaying a message
+	 *
+	 * @return the String entered by the user
+	 */
+	public static String nextString(String message){
+		System.out.println(message);
+		return scanner.next();
+	}
 	/*
 	  
  

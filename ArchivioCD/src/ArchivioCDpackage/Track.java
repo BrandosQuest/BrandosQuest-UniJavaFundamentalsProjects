@@ -7,4 +7,13 @@ package ArchivioCDpackage;
  */
 public class Track {
     String title;
+
+    public Track(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }
