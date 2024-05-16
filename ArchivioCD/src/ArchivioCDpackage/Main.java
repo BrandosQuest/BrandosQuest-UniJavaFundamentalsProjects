@@ -4,7 +4,7 @@ import mylib.InputDatiB;
 import mylib.MenuB;
 
 /**
- * The Main class of my project, polveri sottili, containing the runnable main method
+ * The Main class of my project, Archivio CD, containing the runnable main method
  *
  * @author brando
  */
