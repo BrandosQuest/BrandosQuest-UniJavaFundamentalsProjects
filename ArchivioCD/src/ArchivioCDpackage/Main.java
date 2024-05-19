@@ -25,7 +25,7 @@ public class Main {
 
         do {
             menuB.printMenuPlusQuit();
-            choice=InputDatiB.nextInt(0,6);
+            choice=InputDatiB.nextInt(0,6, -1);
 
             switch (choice) {
                 case 1:
@@ -51,7 +51,7 @@ public class Main {
 
                     break;
                 default:
-
+                    System.out.println("Not an option, try again");
                     break;
             }
         } while (choice!=0);
