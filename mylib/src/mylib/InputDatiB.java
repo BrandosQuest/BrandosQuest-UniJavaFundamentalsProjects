@@ -298,7 +298,7 @@ public class InputDatiB
 	/**
 	 * Method used to ask the user for a String
 	 *
-	 * @return the String entered by the user
+	 * @return the String entered by the user, single word
 	 */
 	public static String nextString(){
 		return scanner.next();
@@ -306,11 +306,20 @@ public class InputDatiB
 	/**
 	 * Method used to ask the user for a String after displaying a message
 	 *
-	 * @return the String entered by the user
+	 * @return the String entered by the user,  single word
 	 */
 	public static String nextString(String message){
 		System.out.println(message);
 		return scanner.next();
+	}
+	/**
+	 * Method used to ask the user for a String after displaying a message
+	 *
+	 * @return the String entered by the user, whole line
+	 */
+	public static String nextStringLine(String message){
+		System.out.println(message);
+		return scanner.nextLine();
 	}
 	/*
 	  

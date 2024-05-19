@@ -15,13 +15,13 @@ public class CD {
     private ArrayList<Track> tracks=new ArrayList<>();
 
     public CD() {
-        this.artist = InputDatiB.nextString("Input the artist:");
-        this.title = InputDatiB.nextString("Input the title:");
+        this.artist = InputDatiB.nextStringLine("Input the artist:");
+        this.title = InputDatiB.nextStringLine("Input the title:");
         System.out.println("Input the tracks(or hit 0 to exit):");
 
         String t;
         do {
-            t = InputDatiB.nextString("Input the track:");
+            t = InputDatiB.nextStringLine("Input the track:");
             this.tracks.add(new Track(t));
         } while (!t.equals("0"));
         tracks.removeLast();
