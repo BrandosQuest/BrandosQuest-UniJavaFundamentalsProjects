@@ -74,7 +74,7 @@ public class Main {
             }
         } while (choice!=0);
     }
-    public static void searchTrack(ArrayList<CD> cds) {
+   /* public static void searchTrack(ArrayList<CD> cds) {
         String title=InputDatiB.nextStringLine("Enter the title of the track: ");
         int trackIndex;
         for (CD cd : cds) {
@@ -83,7 +83,7 @@ public class Main {
                 System.out.println(cd.getTracks().get(trackIndex)+" from "+cd.getTitle());
             }
         }
-    }
+    }*/
     public static int searchCDFromTitle(ArrayList<CD> cds) {
         String title=InputDatiB.nextStringLine("Enter the title: ");
         for (int i = 0; i < cds.size(); i++) {
