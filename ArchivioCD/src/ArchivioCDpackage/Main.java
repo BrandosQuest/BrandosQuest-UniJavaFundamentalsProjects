@@ -29,7 +29,7 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    cds.add(new CD());
+                    cds.add(new CD(cds));
                     System.out.println(cds.getLast().toString());
                     break;
                 case 2:

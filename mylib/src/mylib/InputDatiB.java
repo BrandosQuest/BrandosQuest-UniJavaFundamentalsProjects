@@ -319,7 +319,11 @@ public class InputDatiB
 	 */
 	public static String nextStringLine(String message){
 		System.out.println(message);
-		return scanner.nextLine();
+		String r;
+		do {
+			r= scanner.nextLine();
+		} while (r.isEmpty());
+		return r;
 	}
 	/*
 	  

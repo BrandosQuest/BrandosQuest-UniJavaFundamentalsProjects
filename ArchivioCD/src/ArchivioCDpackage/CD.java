@@ -14,11 +14,24 @@ public class CD {
     private String title;
     private ArrayList<Track> tracks=new ArrayList<>();
 
-    public CD() {
+    public CD(ArrayList<CD> cds) {
         this.artist = InputDatiB.nextStringLine("Input the artist:");
-        this.title = InputDatiB.nextStringLine("Input the title:");
-        System.out.println("Input the tracks(or hit 0 to exit):");
 
+        boolean sameTitle = false;
+        do {
+            this.title = InputDatiB.nextStringLine("Input the title:");
+            for (CD cd : cds) {
+                if (cd.title.equals(this.title)) {
+                    sameTitle = true;
+                    System.out.println("title: " + this.title+" is already in used");
+                    break;
+                }else {
+                    sameTitle = false;
+                }
+            }
+        } while (sameTitle);
+
+        System.out.println("Input the tracks(or hit 0 to exit):");
         String t;
         do {
             t = InputDatiB.nextStringLine("Input the track:");
