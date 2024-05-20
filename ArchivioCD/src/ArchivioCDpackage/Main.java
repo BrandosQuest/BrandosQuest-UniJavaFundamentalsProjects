@@ -33,7 +33,10 @@ public class Main {
                     System.out.println(cds.getLast().toString());
                     break;
                 case 2:
-
+                    int cdIndex=searchCD(cds);
+                    if (cdIndex!=-1) {
+                        System.out.println(cds.get(cdIndex));
+                    }
                     break;
                 case 3:
 
@@ -55,5 +58,15 @@ public class Main {
                     break;
             }
         } while (choice!=0);
+    }
+    public static int searchCD(ArrayList<CD> cds) {
+        String title=InputDatiB.nextStringLine("Enter the title: ");
+        for (int i = 0; i < cds.size(); i++) {
+            if(cds.get(i).getTitle().equalsIgnoreCase(title)) {
+                return i;
+            }
+        }
+        System.out.println("CD not found");
+        return -1;
     }
 }

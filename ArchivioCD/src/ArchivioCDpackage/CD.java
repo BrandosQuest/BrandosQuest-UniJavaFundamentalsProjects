@@ -40,6 +40,30 @@ public class CD {
         tracks.removeLast();
     }
 
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public ArrayList<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(ArrayList<Track> tracks) {
+        this.tracks = tracks;
+    }
+
     @Override
     public String toString() {
         return "CD{" +
