@@ -26,7 +26,7 @@ public class Main {
 
         do {
             menuB.printMenuPlusQuit();
-            choice=InputDatiB.nextInt(0,6, -1);
+            choice=InputDatiB.nextInt(0,8, -1);
 
             int cdIndex;
             switch (choice) {
