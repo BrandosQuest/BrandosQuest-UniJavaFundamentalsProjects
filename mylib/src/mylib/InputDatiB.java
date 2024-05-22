@@ -172,7 +172,7 @@ public class InputDatiB
 			tries++;
 		} while ((error || OutOfRange) &&  tries<3);
 
-		if (tries==3){
+		if ((error || OutOfRange)){
 			System.out.println("WARNING: OUT OF TRIES, VALUE SET TO DEFAULT OPTION: "+defaultValue);
 			return defaultValue;
 		}
