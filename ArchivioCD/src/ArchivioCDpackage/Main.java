@@ -98,13 +98,18 @@ public class Main {
         String artist=InputDatiB.nextStringLine("Enter the artist's name: ");
         String title=InputDatiB.nextStringLine("Enter the track's name: ");
         int trackIndex;
+        boolean found=false;
         for (int i = 0; i < cds.size(); i++) {
             if(cds.get(i).getArtist().equalsIgnoreCase(artist)) {
                 trackIndex=cds.get(i).getTrack(title);
                 if (trackIndex!=-1) {
                     System.out.println(cds.get(i).getTracks().get(trackIndex)+" from "+cds.get(i).getTitle()+" found");
+                    found=true;
                 }
             }
+        }
+        if (!found) {
+            System.out.println("Track not found, no match for artist or track");
         }
     }
 }
