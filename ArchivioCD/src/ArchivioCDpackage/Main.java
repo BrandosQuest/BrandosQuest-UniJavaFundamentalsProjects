@@ -60,7 +60,7 @@ public class Main {
                     searchTrackFromArtist(cds);
                     break;
                 case 7:
-
+                    searchTrackFromTitle(cds);
                     break;
                 case 8:
 
@@ -99,17 +99,32 @@ public class Main {
         String title=InputDatiB.nextStringLine("Enter the track's name: ");
         int trackIndex;
         boolean found=false;
-        for (int i = 0; i < cds.size(); i++) {
-            if(cds.get(i).getArtist().equalsIgnoreCase(artist)) {
-                trackIndex=cds.get(i).getTrack(title);
-                if (trackIndex!=-1) {
-                    System.out.println(cds.get(i).getTracks().get(trackIndex)+" from "+cds.get(i).getTitle()+" found");
-                    found=true;
+        for (CD cd : cds) {
+            if (cd.getArtist().equalsIgnoreCase(artist)) {
+                trackIndex = cd.getTrackIndex(title);
+                if (trackIndex != -1) {
+                    System.out.println(cd.getTracks().get(trackIndex) + " from " + cd.getTitle() + " found");
+                    found = true;
                 }
             }
         }
         if (!found) {
             System.out.println("Track not found, no match for artist or track");
+        }
+    }
+    public static void searchTrackFromTitle(ArrayList<CD> cds) {
+        String title=InputDatiB.nextStringLine("Enter the track's name: ");
+        int trackIndex;
+        boolean found=false;
+        for (CD cd : cds) {
+            trackIndex = cd.getTrackIndex(title);
+            if (trackIndex != -1) {
+                System.out.println(cd.getTracks().get(trackIndex) + " from " + cd.getTitle() + " found");
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Track not found, no match for track name");
         }
     }
 }

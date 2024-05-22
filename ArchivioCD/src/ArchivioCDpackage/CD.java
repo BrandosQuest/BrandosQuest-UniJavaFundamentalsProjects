@@ -43,7 +43,7 @@ public class CD {
     public Track getRandomTrack() {
         return tracks.get((int)(Math.random()*tracks.size()));
     }
-    public int getTrack (String title) {
+    public int getTrackIndex(String title) {
         for (int i = 0; i < tracks.size(); i++) {
             if(tracks.get(i).getTitle().equalsIgnoreCase(title)) {
                 return i;
