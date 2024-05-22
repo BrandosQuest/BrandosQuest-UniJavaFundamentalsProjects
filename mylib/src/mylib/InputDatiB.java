@@ -45,7 +45,7 @@ public class InputDatiB
 				error=false;
 			} catch (Exception e) {
 				System.out.println(BADINPUTMESSAGE);
-				scanner.next();
+				scanner.nextLine();
 				error=true;
 				tries++;
 			}
@@ -85,7 +85,7 @@ public class InputDatiB
 				}
 			} catch (Exception e) {
 				System.out.println(BADINPUTMESSAGE);
-				scanner.next();
+				scanner.nextLine();
 				error=true;
 			}
 			tries++;
@@ -125,7 +125,7 @@ public class InputDatiB
 				}
 			} catch (Exception e) {
 				System.out.println(BADINPUTMESSAGE);
-				scanner.next();
+				scanner.nextLine();
 				error=true;
 			}
 			tries++;
@@ -166,7 +166,7 @@ public class InputDatiB
 				}
 			} catch (Exception e) {
 				System.out.println(BADINPUTMESSAGE);
-				scanner.next();
+				scanner.nextLine();
 				error=true;
 			}
 			tries++;
@@ -207,7 +207,7 @@ public class InputDatiB
 				}
 			} catch (Exception e) {
 				System.out.println(BADINPUTMESSAGE);
-				scanner.next();
+				scanner.nextLine();
 				error=true;
 			}
 			tries++;
