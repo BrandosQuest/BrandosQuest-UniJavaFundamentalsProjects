@@ -315,11 +315,15 @@ public class InputDatiB
 	/**
 	 * Method used to ask the user for a String after displaying a message
 	 *
-	 * @return the String entered by the user, whole line
+	 * @return the String entered by the user, whole line, ignores empty strings
 	 */
 	public static String nextStringLine(String message){
 		System.out.println(message);
-		return scanner.nextLine();
+		String s;
+		do {
+			s = scanner.nextLine();
+		} while (s.isEmpty());
+		return s;
 	}
 	/*
 	  
