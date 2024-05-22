@@ -63,7 +63,7 @@ public class Main {
                     searchTrackFromTitle(cds);
                     break;
                 case 8:
-
+                    selectRandomTracks(cds);
                     break;
                 case 0:
 
@@ -125,6 +125,15 @@ public class Main {
         }
         if (!found) {
             System.out.println("Track not found, no match for track name");
+        }
+    }
+    public static void selectRandomTracks(ArrayList<CD> cds) {
+        int num=InputDatiB.nextInt(1, "Enter the number of tracks to select: ");
+        int cdIndex=0;
+        for (int i = 0; i < num; i++) {
+            cdIndex=(int)(Math.random()*cds.size());
+            cds.get(cdIndex).getRandomTrack();
+            System.out.println("- "+cds.get(cdIndex).getRandomTrack()+ " from " + cds.get(cdIndex).getTitle());
         }
     }
 }
