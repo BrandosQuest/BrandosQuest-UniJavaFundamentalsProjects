@@ -172,7 +172,7 @@ public class InputDatiB
 			tries++;
 		} while ((error || OutOfRange) &&  tries<3);
 
-		if (tries==3){
+		if ((error || OutOfRange)){
 			System.out.println("WARNING: OUT OF TRIES, VALUE SET TO DEFAULT OPTION: "+defaultValue);
 			return defaultValue;
 		}
@@ -319,11 +319,12 @@ public class InputDatiB
 	 */
 	public static String nextStringLine(String message){
 		System.out.println(message);
-		String s;
+
+		String r;
 		do {
-			s = scanner.nextLine();
-		} while (s.isEmpty());
-		return s;
+			r= scanner.nextLine();
+		} while (r.isEmpty());
+		return r;
 	}
 	/*
 	  
