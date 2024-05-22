@@ -16,7 +16,9 @@ public class Main {
      * @param args the parameters of the main method, where the execution starts
      */
     public static void main(String[] args) {
-        final MenuB menuB = new MenuB("CD ARCHIVE", new String[] {"Add a CD to the collection", "Show a CD and it's content",
+        Archive archive = new Archive();
+        archive.start();
+        /*final MenuB menuB = new MenuB("CD ARCHIVE", new String[] {"Add a CD to the collection", "Show a CD and it's content",
             "Remove a CD", "See all CD's and their content", "Select a random track from the archive", "Select a random track from an artist",
             "Select a track from the title", "Select a random list of tracks from the archive"});
 
@@ -28,63 +30,57 @@ public class Main {
             menuB.printMenuPlusQuit();
             choice=InputDatiB.nextInt(0,8, -1);
 
-            int cdIndex;
-            switch (choice) {
-                case 1:
-                    cds.add(new CD(cds));
-                    System.out.println(cds.getLast().toString());
-                    break;
-                case 2:
-                    cdIndex= searchCDFromTitle(cds);
-                    if (cdIndex!=-1) {
-                        System.out.println(cds.get(cdIndex));
-                    }
-                    break;
-                case 3:
-                    cdIndex= searchCDFromTitle(cds);
-                    if (cdIndex!=-1) {
-                        System.out.println(cds.get(cdIndex).getTitle()+" CD removed");
-                        cds.remove(cdIndex);
-                    }
-                    break;
-                case 4:
-                    for (CD cd : cds) {
-                        System.out.println(cd);
-                    }
-                    break;
-                case 5:
-                    cdIndex=(int)(Math.random()*cds.size());
-                    System.out.println(cds.get(cdIndex).getRandomTrack()+" from "+cds.get(cdIndex).getTitle());
-                    break;
-                case 6:
-                    searchTrackFromArtist(cds);
-                    break;
-                case 7:
-                    searchTrackFromTitle(cds);
-                    break;
-                case 8:
-                    selectRandomTracks(cds);
-                    break;
-                case 0:
+            if (!(cds.isEmpty() && (choice!=1 && choice!=0))) {
+                int cdIndex;
+                switch (choice) {
+                    case 1:
+                        cds.add(new CD(cds));
+                        System.out.println(cds.getLast().toString());
+                        break;
+                    case 2:
+                        cdIndex= searchCDFromTitle(cds);
+                        if (cdIndex!=-1) {
+                            System.out.println(cds.get(cdIndex));
+                        }
+                        break;
+                    case 3:
+                        cdIndex= searchCDFromTitle(cds);
+                        if (cdIndex!=-1) {
+                            System.out.println(cds.get(cdIndex).getTitle()+" CD removed");
+                            cds.remove(cdIndex);
+                        }
+                        break;
+                    case 4:
+                        for (CD cd : cds) {
+                            System.out.println(cd);
+                        }
+                        break;
+                    case 5:
+                        cdIndex=(int)(Math.random()*cds.size());
+                        System.out.println(cds.get(cdIndex).getRandomTrack()+" from "+cds.get(cdIndex).getTitle());
+                        break;
+                    case 6:
+                        searchTrackFromArtist(cds);
+                        break;
+                    case 7:
+                        searchTrackFromTitle(cds);
+                        break;
+                    case 8:
+                        selectRandomTracks(cds);
+                        break;
+                    case 0:
 
-                    break;
-                default:
-                    System.out.println("Not an option, try again");
-                    break;
+                        break;
+                    default:
+                        System.out.println("Not an option, try again");
+                        break;
+                }
+            } else {
+                System.out.println("Add a CD to the archive first");
             }
-        } while (choice!=0);
+        } while (choice!=0);*/
     }
-   /* public static void searchTrack(ArrayList<CD> cds) {
-        String title=InputDatiB.nextStringLine("Enter the title of the track: ");
-        int trackIndex;
-        for (CD cd : cds) {
-            trackIndex=cd.getTrack(title);
-            if (trackIndex!=-1) {
-                System.out.println(cd.getTracks().get(trackIndex)+" from "+cd.getTitle());
-            }
-        }
-    }*/
-    public static int searchCDFromTitle(ArrayList<CD> cds) {
+    /*public static int searchCDFromTitle(ArrayList<CD> cds) {
         String title=InputDatiB.nextStringLine("Enter the title: ");
         for (int i = 0; i < cds.size(); i++) {
             if(cds.get(i).getTitle().equalsIgnoreCase(title)) {
@@ -135,5 +131,5 @@ public class Main {
             cds.get(cdIndex).getRandomTrack();
             System.out.println("- "+cds.get(cdIndex).getRandomTrack()+ " from " + cds.get(cdIndex).getTitle());
         }
-    }
+    }*/
 }
