@@ -15,7 +15,7 @@ public class Archive {
     private final MenuB menuB = new MenuB("CD ARCHIVE", new String[] {"Add a CD to the collection", "Show a CD and it's content",
             "Remove a CD", "See all CD's and their content", "Select a random track from the archive", "Select a random track from an artist",
             "Select a track from the title", "Select a random list of tracks from the archive"});
-    private final ArrayList<CD> cds = new ArrayList<>();
+    private ArrayList<CD> cds = new ArrayList<>();
 
     public Archive() {
 
@@ -78,6 +78,15 @@ public class Archive {
             }
         } while (choice!=0);
     }
+
+    public ArrayList<CD> getCds() {
+        return cds;
+    }
+
+    public void setCds(ArrayList<CD> cds) {
+        this.cds = cds;
+    }
+
     public int searchCDFromTitle() {
         String title=InputDatiB.nextStringLine("Enter the title: ");
         for (int i = 0; i < cds.size(); i++) {

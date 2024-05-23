@@ -1,3 +1,25 @@
+package Tests;
+
+import static org.junit.Assert.*;
+
+import ArchivioCDpackage.Archive;
+import ArchivioCDpackage.CD;
+import org.junit.Test;
+
+import java.util.ArrayList;
+
+public class ArchivioCdTest {
+    @Test
+    public void testAggiuntaCd() {
+        ArrayList<CD> cds = new ArrayList<>();
+        Archive archive = new Archive();
+        cds.add(new CD(cds));
+        cds.add(new CD(cds));
+        archive.setCds(cds);
+        assertEquals(2, archive.getCds().size());
+    }
+}
+
 /*
 package Tests;
 
