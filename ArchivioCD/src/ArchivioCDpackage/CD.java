@@ -14,6 +14,9 @@ public class CD {
     private String title;
     private ArrayList<Track> tracks=new ArrayList<>();
 
+    /**
+     * @param cds
+     */
     public CD(ArrayList<CD> cds) {
         this.artist = InputDatiB.nextStringLine("Input the artist:");
 
@@ -49,7 +52,6 @@ public class CD {
                 return i;
             }
         }
-        //System.out.println("Track not found");
         return -1;
     }
 
@@ -57,24 +59,12 @@ public class CD {
         return artist;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public ArrayList<Track> getTracks() {
         return tracks;
-    }
-
-    public void setTracks(ArrayList<Track> tracks) {
-        this.tracks = tracks;
     }
 
     @Override
