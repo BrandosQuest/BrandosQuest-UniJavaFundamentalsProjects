@@ -306,6 +306,7 @@ public class InputDatiB
 	/**
 	 * Method used to ask the user for a String after displaying a message
 	 *
+	 * @param message the message displayed to the user
 	 * @return the String entered by the user,  single word
 	 */
 	public static String nextString(String message){
@@ -315,6 +316,7 @@ public class InputDatiB
 	/**
 	 * Method used to ask the user for a String after displaying a message
 	 *
+	 * @param message the message displayed to the user
 	 * @return the String entered by the user, whole line, ignores empty strings
 	 */
 	public static String nextStringLine(String message){

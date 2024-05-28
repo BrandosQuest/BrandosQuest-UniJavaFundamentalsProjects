@@ -58,7 +58,8 @@ public class CD {
     public Track getRandomTrack() {
         return tracks.get((int)(Math.random()*tracks.size()));
     }
-    /**Method that returns the index of a specified track
+    /**Method that returns the index of a specified track form the title
+     * @param title the title used for the search
      * @return the index of a specified track or -1
      */
     public int getTrackIndex(String title) {
