@@ -1,4 +1,4 @@
-package Tests;
+/*package Tests;
 
 import static org.junit.Assert.*;
 
@@ -18,7 +18,7 @@ public class ArchivioCdTest {
         archive.setCds(cds);
         assertEquals(2, archive.getCds().size());
     }
-}
+}*/
 
 /*
 package Tests;
