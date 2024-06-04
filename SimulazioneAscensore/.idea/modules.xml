@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SimulazioneAscensore.iml" filepath="$PROJECT_DIR$/SimulazioneAscensore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mylib/src/mylib/mylib.iml" filepath="$PROJECT_DIR$/../mylib/src/mylib/mylib.iml" />
     </modules>
   </component>
 </project>
