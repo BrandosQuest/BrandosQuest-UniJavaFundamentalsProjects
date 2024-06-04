@@ -53,6 +53,7 @@ diagramma delle classi UML realizzabile con un qualsiasi programma di grafica
 
 
 
-
-
-
+    classi
+    Elevator  Floors maxPeopleLoad, initial position, position, call queue elevator.compileActionsQueue and show action queue
+    ? Building Floors, underground Floors, and name
+    Call   floor(origin), direction(destination) direction
