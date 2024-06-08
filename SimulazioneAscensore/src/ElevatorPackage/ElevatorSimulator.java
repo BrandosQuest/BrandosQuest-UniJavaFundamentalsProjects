@@ -1,9 +1,10 @@
 package ElevatorPackage;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ElevatorSimulator {
+public class ElevatorSimulator implements Serializable {
     private final Elevator elevator;
     private final Building building;
     private final LinkedList<Call> calls;
@@ -36,10 +37,10 @@ public class ElevatorSimulator {
     @Override
     public String toString() {
         return "ElevatorSimulator{" +
-                "elevator=" + elevator +
-                ", building=" + building +
-                ", calls=" + calls +
-                ", actions=" + actions +
+                "\nelevator=" + elevator +
+                ", \nbuilding=" + building +
+                ", \ncalls=" + calls +
+                ", \nactions=" + actions +
                 '}';
     }
 }

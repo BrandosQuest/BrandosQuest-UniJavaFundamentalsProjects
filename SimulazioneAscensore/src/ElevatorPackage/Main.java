@@ -3,13 +3,19 @@ package ElevatorPackage;
 import mylib.InputDatiB;
 import mylib.MenuB;
 
+import java.io.*;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {//remove throws
+        ElevatorSimulator s = serializeDataIn();
+        System.out.println(s);
         ElevatorSimulator simulator;
         greetings();
         simulator=simulatorStartUp();
         System.out.println(simulator);
         simulatorCalls(simulator);
+        serializeDataOut(simulator);
+
     }
     public static void greetings(){
         System.out.println("ELEVATOR SIMULATOR!!!");
@@ -44,4 +50,21 @@ public class Main {
             choice=InputDatiB.nextInt(0, 1);
        }
     }
+    public static void serializeDataOut(ElevatorSimulator simulator)throws IOException {
+        File f = new File("Test.txt");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                new BufferedOutputStream(
+                new FileOutputStream(f)));
+        objectOutputStream.writeObject(simulator);
+        objectOutputStream.close();
     }
+    public static ElevatorSimulator serializeDataIn() throws IOException, ClassNotFoundException {
+        File f = new File("Test.txt");
+        ObjectInputStream objectOutputStream = new ObjectInputStream(
+                new BufferedInputStream(
+                        new FileInputStream(f)));
+        ElevatorSimulator s = (ElevatorSimulator) objectOutputStream.readObject();
+        objectOutputStream.close();
+        return s;
+    }
+}

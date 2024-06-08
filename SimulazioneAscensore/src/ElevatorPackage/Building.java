@@ -1,6 +1,8 @@
 package ElevatorPackage;
 
-public class Building {
+import java.io.Serializable;
+
+public class Building implements Serializable {
     private final int floors;
     private final int undergroundFloors;
     public Building(int floors, int undergroundFloors) {

@@ -1,6 +1,8 @@
 package ElevatorPackage;
 
-public class Call {
+import java.io.Serializable;
+
+public class Call implements Serializable {
     private final int originFloor;
     private final int destinationFloor;
     private Direction direction;
@@ -28,7 +30,7 @@ public class Call {
 
     @Override
     public String toString() {
-        return "Call{" +
+        return "\nCall{" +
                 "originFloor=" + originFloor +
                 ", destinationFloor=" + destinationFloor +
                 ", direction=" + direction +

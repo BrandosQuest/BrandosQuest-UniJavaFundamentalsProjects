@@ -1,7 +1,9 @@
 package ElevatorPackage;
 
 
-public class Elevator {
+import java.io.Serializable;
+
+public class Elevator implements Serializable {
     private final int position;
     private final int maxPeopleLoad;
 
