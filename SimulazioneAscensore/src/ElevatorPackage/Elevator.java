@@ -3,9 +3,9 @@ package ElevatorPackage;
 import java.util.Queue;
 
 public class Elevator {
-    int maxPeopleLoad;
     int position;
     Building building;
+    int maxPeopleLoad;
 
     public Elevator(int maxPeopleLoad, int position, Building building) {
         if(!(position>=building.getLowestFloor() && position<=building.getHighestFloor())){
@@ -14,5 +14,14 @@ public class Elevator {
         this.maxPeopleLoad = maxPeopleLoad;
         this.position = position;
         this.building = building;
+    }
+
+    @Override
+    public String toString() {
+        return "Elevator{" +
+                "position=" + position +
+                ", building=" + building +
+                ", maxPeopleLoad=" + maxPeopleLoad +
+                '}';
     }
 }

@@ -16,4 +16,12 @@ public class Building {
     public int getLowestFloor() {
         return -undergroundFloors;
     }
+
+    @Override
+    public String toString() {
+        return "Building{" +
+                "floors=" + floors +
+                ", undergroundFloors=" + undergroundFloors +
+                '}';
+    }
 }

@@ -25,4 +25,13 @@ public class Call {
             throw new IllegalArgumentException("Origin floor is the same as the destination floor");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Call{" +
+                "originFloor=" + originFloor +
+                ", destinationFloor=" + destinationFloor +
+                ", direction=" + direction +
+                '}';
+    }
 }
