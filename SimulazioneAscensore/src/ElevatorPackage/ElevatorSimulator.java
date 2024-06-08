@@ -4,15 +4,20 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class ElevatorSimulator {
-    Elevator elevator;
-    Building building;
-    LinkedList<Call> calls;
-    Queue<String> actions;
+    private final Elevator elevator;
+    private final Building building;
+    private final LinkedList<Call> calls;
+    private Queue<String> actions;
 
     public ElevatorSimulator(Building building, int maxPeopleLoad, int position) {
-        building = building;
-        elevator = new Elevator(maxPeopleLoad, position, building);
-
+        this.building = building;
+        if(!(position>=building.getLowestFloor() && position<=building.getHighestFloor())){
+            throw new IllegalArgumentException("Elevator position is out of bounds in respect to the building floors numbers");
+        }else {
+            elevator = new Elevator(maxPeopleLoad, position, building.getLowestFloor(), building.getHighestFloor());
+        }
+        calls = new LinkedList<>();
+        actions = new LinkedList<>();
     }
     public void elevatorCall(int originFloor, int destinationFloor ) {
         calls.add(new Call( originFloor, destinationFloor, building));
@@ -22,6 +27,10 @@ public class ElevatorSimulator {
     }
     public String printActions() {
         return actions.toString();
+    }
+
+    public Building getBuilding() {
+        return building;
     }
 
     @Override

@@ -1,8 +1,8 @@
 package ElevatorPackage;
 
 public class Building {
-    int floors;
-    int undergroundFloors;
+    private final int floors;
+    private final int undergroundFloors;
     public Building(int floors, int undergroundFloors) {
         if (floors < 10){
             throw new IllegalArgumentException("At least 10 floors are required");

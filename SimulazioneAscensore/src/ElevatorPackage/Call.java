@@ -1,9 +1,9 @@
 package ElevatorPackage;
 
 public class Call {
-    int originFloor;
-    int destinationFloor;
-    Direction direction;
+    private final int originFloor;
+    private final int destinationFloor;
+    private Direction direction;
 
     public Call(int originFloor, int destinationFloor, Building building) {
         if(!(originFloor>=building.getLowestFloor() && originFloor<=building.getHighestFloor())){
