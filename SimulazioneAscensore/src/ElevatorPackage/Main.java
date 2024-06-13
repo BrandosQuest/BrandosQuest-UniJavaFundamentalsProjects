@@ -2,7 +2,7 @@ package ElevatorPackage;
 
 import mylib.InputDatiB;
 import mylib.MenuB;
-
+import java. util.regex.*;
 import java.io.*;
 
 public class Main {
@@ -12,6 +12,8 @@ public class Main {
         ElevatorSimulator simulator;
         greetings();
         simulator=simulatorStartUp();
+
+        // check if the objectSaves dir is created after the download of project
 
 
         System.out.println(simulator);
@@ -86,52 +88,66 @@ public class Main {
                         InputDatiB.nextInt(0, maxPeopleLoad, "enter the people load of the elevator"+" - between "+0+" and "+maxPeopleLoad));
     }
     public static void simulatorCalls(ElevatorSimulator simulator){
-        MenuB menuB = new MenuB("ELEVATORCALLS",new String[]{"enter new elevator call"});
+        MenuB menuB = new MenuB("ELEVATORCALLS",new String[]{"enter new elevator call", "save the current state of the simulation"});
         menuB.printMenuPlusQuit();
-        int choice=InputDatiB.nextInt(0, 1);
+        int choice=InputDatiB.nextInt(0, 2);
         while (choice!=0){
-            int originFloor= InputDatiB.nextInt(simulator.getBuilding().getLowestFloor(), simulator.getBuilding().getHighestFloor(),
-            "enter the floor of the call"+
-                    " - between "+simulator.getBuilding().getLowestFloor()+" and "+simulator.getBuilding().getHighestFloor());
-            int destinationFloor;
-            do {
-                destinationFloor = InputDatiB.nextInt(simulator.getBuilding().getLowestFloor(), simulator.getBuilding().getHighestFloor(),
-                "enter the destination floor of the call, different from the origin "+originFloor+
-                        " - between "+simulator.getBuilding().getLowestFloor()+" and "+simulator.getBuilding().getHighestFloor());
-            } while (destinationFloor==originFloor);
-            simulator.elevatorCall(originFloor, destinationFloor);
-            System.out.println(simulator);
+            switch (choice){
+                case 1:
+                    int originFloor= InputDatiB.nextInt(simulator.getBuilding().getLowestFloor(), simulator.getBuilding().getHighestFloor(),
+                            "enter the floor of the call"+
+                                    " - between "+simulator.getBuilding().getLowestFloor()+" and "+simulator.getBuilding().getHighestFloor());
+                    int destinationFloor;
+                    do {
+                        destinationFloor = InputDatiB.nextInt(simulator.getBuilding().getLowestFloor(), simulator.getBuilding().getHighestFloor(),
+                                "enter the destination floor of the call, different from the origin "+originFloor+
+                                        " - between "+simulator.getBuilding().getLowestFloor()+" and "+simulator.getBuilding().getHighestFloor());
+                    } while (destinationFloor==originFloor);
+                    simulator.elevatorCall(originFloor, destinationFloor);
+                    System.out.println(simulator);
+                    break;
+                case 2:
+                    saveSimulation(simulator);
+                    break;
+                default:break;
+            }
             menuB.printMenuPlusQuit();
-            choice=InputDatiB.nextInt(0, 1);
+            choice=InputDatiB.nextInt(0, 2);
        }
     }
     public static void saveSimulation(ElevatorSimulator simulator){
         System.out.println("SAVING CURRENT SIMULATION");
         String name = InputDatiB.nextStringLine("enter a name for the save or D to use the default \"save+numberSave\"");
-        if(name.equalsIgnoreCase("d")){
-            //default name
-        }else{
-            File f = new File("saves/objectSaves/"+name+".txt");
 
-            try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                        new BufferedOutputStream(
-                                new FileOutputStream(f)));
-                objectOutputStream.writeObject(simulator);
-                objectOutputStream.close();
-                System.out.println("Save successful");
-            } catch (IOException e){
-                System.out.println("Save failed\n"+e.getMessage());
+        File savingFile=null;
+        if(name.equalsIgnoreCase("d")){
+            File f = new File("saves/objectSaves");
+            String[] s = f.list(new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    return dir.getName().startsWith("save") && dir.getName().endsWith("\\d");
+                }
+            });
+            int max=0;
+            for (int i = 0; i < s.length; i++) {
+                s[i]=s[i].substring(3);
+                if(Integer.parseInt(s[i])>max){
+                    max=Integer.parseInt(s[i]);
+                }
             }
+            savingFile = new File("saves/objectSaves/save"+max+".txt");
+        }else{
+            savingFile = new File("saves/objectSaves/"+name+".txt");
+        }
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                    new BufferedOutputStream(
+                            new FileOutputStream(savingFile)));
+            objectOutputStream.writeObject(simulator);
+            objectOutputStream.close();
+            System.out.println("Save successful");
+        } catch (IOException e){
+            System.out.println("Save failed\n"+e.getMessage());
         }
     }
-    /*public static ElevatorSimulator serializeDataIn() throws IOException, ClassNotFoundException {
-        File f = new File("Test.txt");
-        ObjectInputStream objectOutputStream = new ObjectInputStream(
-                new BufferedInputStream(
-                        new FileInputStream(f)));
-        ElevatorSimulator s = (ElevatorSimulator) objectOutputStream.readObject();
-        objectOutputStream.close();
-        return s;
-    }*/
 }
