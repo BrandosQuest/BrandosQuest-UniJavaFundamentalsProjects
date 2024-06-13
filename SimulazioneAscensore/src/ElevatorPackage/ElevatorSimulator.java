@@ -12,15 +12,14 @@ public class ElevatorSimulator implements Serializable {
 
     public ElevatorSimulator(Building building, int maxPeopleLoad, int position, int peopleLoad) {
         this.building = building;
-        if(!(position>=building.getLowestFloor() && position<=building.getHighestFloor())){
+        if(!(position>=building.getLowestFloor() && position<=building.getHighestFloor())){//conditions already checked in elevator constructor
             throw new IllegalArgumentException("Elevator position is out of bounds in respect to the building floors numbers");
         }if(peopleLoad>maxPeopleLoad){
             throw new IllegalArgumentException("Elevator load is out of bounds in respect to the max people load given");
         }else {
-            elevator = new Elevator(maxPeopleLoad, position, building.getLowestFloor(), building.getHighestFloor(), peopleLoad);
+            elevator = new Elevator(maxPeopleLoad, peopleLoad, position, building);
         }
         calls = new LinkedList<>();
-        actions = new LinkedList<>();
     }
     public void elevatorCall(int originFloor, int destinationFloor ) {
         calls.add(new Call( originFloor, destinationFloor, building));
@@ -31,7 +30,6 @@ public class ElevatorSimulator implements Serializable {
     public String printActions() {
         return actions.toString();
     }
-
     public Building getBuilding() {
         return building;
     }

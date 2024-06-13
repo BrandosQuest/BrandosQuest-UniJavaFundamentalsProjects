@@ -28,7 +28,7 @@ public class Main {
                 (building,
                 maxPeopleLoad,
                 InputDatiB.nextInt(building.getLowestFloor(), building.getHighestFloor(),
-                        "enter the starting floor"+" - between "+building.getLowestFloor()+" and "+building.getHighestFloor()),
+                        "enter the starting floor of the elevator"+" - between "+building.getLowestFloor()+" and "+building.getHighestFloor()),
                 InputDatiB.nextInt(0, maxPeopleLoad, "enter the people load of the elevator"+" - between "+0+" and "+maxPeopleLoad));
     }
     public static void simulatorCalls(ElevatorSimulator simulator){
