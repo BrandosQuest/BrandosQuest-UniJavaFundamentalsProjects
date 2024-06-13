@@ -12,6 +12,8 @@ public class Main {
         ElevatorSimulator simulator;
         greetings();
         simulator=simulatorStartUp();
+
+
         System.out.println(simulator);
         simulatorCalls(simulator);
         //serializeDataOut(simulator);
@@ -27,31 +29,51 @@ public class Main {
         ElevatorSimulator simulator = null;
         switch(choice){
             case 1:
-                simulator = fileStartUp();
+                simulator = textFileStartUp();
                 break;
             case 2:
                 simulator = savedStartUp();
                 break;
             case 3:
                 simulator = manualStartUp();
+                if (InputDatiB.nextStringLine("Do you want to save the current state of te simulation? (y/n)").equalsIgnoreCase("y")){
+                    saveSimulation(simulator);
+                }
                 break;
             default:
                 System.out.println("Quitting");
                 System.exit(0);
                 break;
         }
+
+
         return simulator;
     }
 
-    public static ElevatorSimulator fileStartUp(){
+    public static ElevatorSimulator textFileStartUp(){
         System.out.println("LOADING FROM TEXT FILE");
         return null;
     }
     public static ElevatorSimulator savedStartUp(){
         System.out.println("LOADING FROM PAST SAVED SIMULATION");
-        return null;
+        String name = InputDatiB.nextStringLine("enter the name of the saved simulation");
+        ElevatorSimulator simulator = null;
+        File f = new File("saves/objectSaves/"+name+".txt");
+
+        try {
+            ObjectInputStream objectOutputStream = new ObjectInputStream(
+                    new BufferedInputStream(
+                            new FileInputStream(f)));
+            simulator = (ElevatorSimulator) objectOutputStream.readObject();
+            objectOutputStream.close();
+        }catch (IOException | ClassNotFoundException e){
+            System.out.println("Error in reading the file, going into manual mode");
+            simulator = manualStartUp();
+        }
+
+        return simulator;
     }
-    public static ElevatorSimulator manualStartUp(){
+    public static ElevatorSimulator manualStartUp(){//look at the order of the inputs and at people load, could be problematic
         System.out.println("MANUAL MODE");
         Building building = new Building(InputDatiB.nextInt(10, "enter the number of floors of the building - at least 10"),//improve this  line, with handling for inputs ad 1 1
                 InputDatiB.nextInt(0,10, "enter the number of underground floors of the building - no more than 10"));//improve this  line, with limits to the input
@@ -83,15 +105,27 @@ public class Main {
             choice=InputDatiB.nextInt(0, 1);
        }
     }
-    public static void serializeDataOut(ElevatorSimulator simulator)throws IOException {
-        File f = new File("Test.txt");
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new BufferedOutputStream(
-                new FileOutputStream(f)));
-        objectOutputStream.writeObject(simulator);
-        objectOutputStream.close();
+    public static void saveSimulation(ElevatorSimulator simulator){
+        System.out.println("SAVING CURRENT SIMULATION");
+        String name = InputDatiB.nextStringLine("enter a name for the save or D to use the default \"save+numberSave\"");
+        if(name.equalsIgnoreCase("d")){
+            //default name
+        }else{
+            File f = new File("saves/objectSaves/"+name+".txt");
+
+            try {
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                        new BufferedOutputStream(
+                                new FileOutputStream(f)));
+                objectOutputStream.writeObject(simulator);
+                objectOutputStream.close();
+                System.out.println("Save successful");
+            } catch (IOException e){
+                System.out.println("Save failed\n"+e.getMessage());
+            }
+        }
     }
-    public static ElevatorSimulator serializeDataIn() throws IOException, ClassNotFoundException {
+    /*public static ElevatorSimulator serializeDataIn() throws IOException, ClassNotFoundException {
         File f = new File("Test.txt");
         ObjectInputStream objectOutputStream = new ObjectInputStream(
                 new BufferedInputStream(
@@ -99,5 +133,5 @@ public class Main {
         ElevatorSimulator s = (ElevatorSimulator) objectOutputStream.readObject();
         objectOutputStream.close();
         return s;
-    }
+    }*/
 }
