@@ -21,15 +21,47 @@ public class Main {
         System.out.println("ELEVATOR SIMULATOR!!!");
     }
     public static ElevatorSimulator simulatorStartUp(){
+        MenuB menuB = new MenuB("loading options", new String[] {"Load from text file","Load from a saved simulation", "Manual mode"});
+        menuB.printMenuPlusQuit();
+        int choice=InputDatiB.nextInt(0, 3, 3);
+        ElevatorSimulator simulator = null;
+        switch(choice){
+            case 1:
+                simulator = fileStartUp();
+                break;
+            case 2:
+                simulator = savedStartUp();
+                break;
+            case 3:
+                simulator = manualStartUp();
+                break;
+            default:
+                System.out.println("Quitting");
+                System.exit(0);
+                break;
+        }
+        return simulator;
+    }
+
+    public static ElevatorSimulator fileStartUp(){
+        System.out.println("LOADING FROM TEXT FILE");
+        return null;
+    }
+    public static ElevatorSimulator savedStartUp(){
+        System.out.println("LOADING FROM PAST SAVED SIMULATION");
+        return null;
+    }
+    public static ElevatorSimulator manualStartUp(){
+        System.out.println("MANUAL MODE");
         Building building = new Building(InputDatiB.nextInt(10, "enter the number of floors of the building - at least 10"),//improve this  line, with handling for inputs ad 1 1
                 InputDatiB.nextInt(0,10, "enter the number of underground floors of the building - no more than 10"));//improve this  line, with limits to the input
         int maxPeopleLoad = InputDatiB.nextInt(1, "enter the maximum people load of the elevator - at least 1");
         return new ElevatorSimulator
                 (building,
-                maxPeopleLoad,
-                InputDatiB.nextInt(building.getLowestFloor(), building.getHighestFloor(),
-                        "enter the starting floor of the elevator"+" - between "+building.getLowestFloor()+" and "+building.getHighestFloor()),
-                InputDatiB.nextInt(0, maxPeopleLoad, "enter the people load of the elevator"+" - between "+0+" and "+maxPeopleLoad));
+                        maxPeopleLoad,
+                        InputDatiB.nextInt(building.getLowestFloor(), building.getHighestFloor(),
+                                "enter the starting floor of the elevator"+" - between "+building.getLowestFloor()+" and "+building.getHighestFloor()),
+                        InputDatiB.nextInt(0, maxPeopleLoad, "enter the people load of the elevator"+" - between "+0+" and "+maxPeopleLoad));
     }
     public static void simulatorCalls(ElevatorSimulator simulator){
         MenuB menuB = new MenuB("ELEVATORCALLS",new String[]{"enter new elevator call"});
