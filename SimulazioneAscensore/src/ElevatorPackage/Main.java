@@ -2,6 +2,9 @@ package ElevatorPackage;
 
 import mylib.InputDatiB;
 import mylib.MenuB;
+
+import java.util.Iterator;
+import java.util.LinkedList;
 import java. util.regex.*;
 import java.io.*;
 
@@ -60,18 +63,31 @@ public class Main {
         ElevatorSimulator simulator = null;
         System.out.println("File located in " + inputFile.getPath());
         System.out.println("File located in " + inputFile.getAbsolutePath());
+        LinkedList<String> linesRead= new LinkedList<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(
                     new FileReader(inputFile));
-            /*String rigaLetta = bufferedReader.readLine();
-            int j = Integer.parseInt(rigaLetta);*/
+            while ((bufferedReader.readLine()) != null) {
+                linesRead.add(bufferedReader.readLine());
+            }
         }catch (IOException e){
-            System.out.println("Error in reading the file, going into manual mode");
+            System.out.println("Error in reading the file, going into manual mode\n"+e.getMessage());
             simulator = manualStartUp();
+        }
+        Iterator<String> iterator = linesRead.iterator();
+        while(iterator.hasNext()){
+            String line = iterator.next();
+            System.out.println(line);
         }
 
 
-
+        /*Building building = new Building(InputDatiB.nextInt(10, "enter the number of floors of the building - at least 10"),//improve this  line, with handling for inputs ad 1 1
+                InputDatiB.nextInt(0,10, "enter the number of underground floors of the building - no more than 10"));//improve this  line, with limits to the input
+        return new ElevatorSimulator
+                (building,
+                        InputDatiB.nextInt(building.getLowestFloor(), building.getHighestFloor(),
+                                "enter the starting floor of the elevator"+" - between "+building.getLowestFloor()+" and "+building.getHighestFloor()),
+                        InputDatiB.nextInt(1, "enter the maximum people load of the elevator - at least 1"));*/
 
 
         return simulator;

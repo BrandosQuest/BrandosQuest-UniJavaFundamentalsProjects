@@ -7,6 +7,8 @@ _15
 _5
 >Elevator starting floor, comprised in the building floors
 _0
+>Maximum people load of the elevator, at least one person
+_4
 >People waiting, (_waitingFloor, destinationFloor), comprised in the building floors
 _0,4
 _0,6
