@@ -14,6 +14,8 @@ public class Main {
         simulator=simulatorStartUp();
 
         // check if the objectSaves dir is created after the download of project
+        //make all methods private or the right one
+        // dont use d for default but enter
 
 
         System.out.println(simulator);
@@ -54,7 +56,25 @@ public class Main {
 
     public static ElevatorSimulator textFileStartUp(){
         System.out.println("LOADING FROM TEXT FILE");
-        return null;
+        File inputFile = new File("saves/elevatorSimulatorInitialState.txt");
+        ElevatorSimulator simulator = null;
+        System.out.println("File located in " + inputFile.getPath());
+        System.out.println("File located in " + inputFile.getAbsolutePath());
+        try {
+            BufferedReader bufferedReader = new BufferedReader(
+                    new FileReader(inputFile));
+            /*String rigaLetta = bufferedReader.readLine();
+            int j = Integer.parseInt(rigaLetta);*/
+        }catch (IOException e){
+            System.out.println("Error in reading the file, going into manual mode");
+            simulator = manualStartUp();
+        }
+
+
+
+
+
+        return simulator;
     }
     public static ElevatorSimulator savedStartUp(){
         System.out.println("LOADING FROM PAST SAVED SIMULATION");
@@ -108,13 +128,11 @@ public class Main {
         System.out.println("MANUAL MODE");
         Building building = new Building(InputDatiB.nextInt(10, "enter the number of floors of the building - at least 10"),//improve this  line, with handling for inputs ad 1 1
                 InputDatiB.nextInt(0,10, "enter the number of underground floors of the building - no more than 10"));//improve this  line, with limits to the input
-        int maxPeopleLoad = InputDatiB.nextInt(1, "enter the maximum people load of the elevator - at least 1");
         return new ElevatorSimulator
                 (building,
-                        maxPeopleLoad,
-                        InputDatiB.nextInt(building.getLowestFloor(), building.getHighestFloor(),
-                                "enter the starting floor of the elevator"+" - between "+building.getLowestFloor()+" and "+building.getHighestFloor()),
-                        InputDatiB.nextInt(0, maxPeopleLoad, "enter the people load of the elevator"+" - between "+0+" and "+maxPeopleLoad));
+                InputDatiB.nextInt(building.getLowestFloor(), building.getHighestFloor(),
+                        "enter the starting floor of the elevator"+" - between "+building.getLowestFloor()+" and "+building.getHighestFloor()),
+                InputDatiB.nextInt(1, "enter the maximum people load of the elevator - at least 1"));
     }
     public static void simulatorCalls(ElevatorSimulator simulator){
         MenuB menuB = new MenuB("ELEVATORCALLS",new String[]{"enter new elevator call", "save the current state of the simulation"});

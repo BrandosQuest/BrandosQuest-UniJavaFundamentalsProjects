@@ -6,18 +6,15 @@ import java.io.Serializable;
 public class Elevator implements Serializable {
     private final int position;
     private final int maxPeopleLoad;
-    private final int PeopleLoad;
+    private final int peopleLoad;
 
-    public Elevator(int maxPeopleLoad, int peopleLoad, int position, Building building) {
+    public Elevator(Building building, int position, int maxPeopleLoad) {
         if(!(position>= building.getLowestFloor() && position<= building.getHighestFloor())){
             throw new IllegalArgumentException("Elevator position is out of bounds in respect to the building floors numbers");
         }
         this.position = position;
         this.maxPeopleLoad = maxPeopleLoad;
-        if(peopleLoad>maxPeopleLoad){
-            throw new IllegalArgumentException("Elevator load is out of bounds in respect to the max people load given");
-        }
-        PeopleLoad = peopleLoad;
+        this.peopleLoad=0;
     }
 
     @Override

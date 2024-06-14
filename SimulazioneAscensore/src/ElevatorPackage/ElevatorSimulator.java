@@ -10,9 +10,9 @@ public class ElevatorSimulator implements Serializable {
     private final LinkedList<Call> calls;
     private Queue<String> actions;
 
-    public ElevatorSimulator(Building building, int maxPeopleLoad, int position, int peopleLoad) {
+    public ElevatorSimulator(Building building, int position, int maxPeopleLoad) {
         this.building = building;
-        elevator = new Elevator(maxPeopleLoad, peopleLoad, position, building);
+        elevator = new Elevator(building, position, maxPeopleLoad);
         calls = new LinkedList<>();
     }
     public void elevatorCall(int originFloor, int destinationFloor ) {

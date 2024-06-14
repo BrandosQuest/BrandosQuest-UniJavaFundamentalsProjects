@@ -1,0 +1,19 @@
+!!! Hi, this is the template and the final file used to represent a state of the elevator
+!!! Try to test for liminal cases
+
+>Number of building floors, more than 10
+_15
+>Number of underground floors
+_5
+>Elevator starting floor, comprised in the building floors
+_0
+>People waiting, (_waitingFloor, destinationFloor), comprised in the building floors
+_0,4
+_0,6
+_-2,-3
+_4,4
+_9,-3
+>People already on the elevator, (_destinationFloor), comprised in the building floors
+_9
+_-3
+_5
