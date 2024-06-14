@@ -58,14 +58,43 @@ public class Main {
     }
     public static ElevatorSimulator savedStartUp(){
         System.out.println("LOADING FROM PAST SAVED SIMULATION");
-        String name = InputDatiB.nextStringLine("enter the name of the saved simulation");
+        String name = InputDatiB.nextStringLine("enter the name of the saved simulation or D to use the last default save (\"save+numberSave\")");
         ElevatorSimulator simulator = null;
-        File f = new File("saves/objectSaves/"+name+".txt");
+        File inputFile = null;
+
+        if(name.equalsIgnoreCase("d")){
+            File f = new File("saves/objectSaves");
+            String[] s = f.list(new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    // Define the regex pattern to match a string that ends with a digit
+                    String regex = "\\d\\.txt$";
+                    // Compile the pattern
+                    Pattern pattern = Pattern.compile(regex);
+                    // Create a matcher for the input string
+                    Matcher matcher = pattern.matcher(name);
+                    // Check if the pattern matches the entire input string
+                    return name.startsWith("save") && matcher.find();
+                    //return dir.getName().startsWith("save") && dir.getName().endsWith("\\d");
+                }
+            });
+            int max=0;
+            for (int i = 0; i < s.length; i++) {
+                s[i]=s[i].substring(4);
+                s[i]=s[i].split(".txt")[0];
+                if(Integer.parseInt(s[i])>max){
+                    max=Integer.parseInt(s[i]);
+                }
+            }
+            inputFile = new File("saves/objectSaves/save"+max+".txt");
+        }else {
+            inputFile = new File("saves/objectSaves/"+name+".txt");
+        }
 
         try {
             ObjectInputStream objectOutputStream = new ObjectInputStream(
                     new BufferedInputStream(
-                            new FileInputStream(f)));
+                            new FileInputStream(inputFile)));
             simulator = (ElevatorSimulator) objectOutputStream.readObject();
             objectOutputStream.close();
         }catch (IOException | ClassNotFoundException e){
