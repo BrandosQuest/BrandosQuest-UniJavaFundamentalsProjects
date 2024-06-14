@@ -20,6 +20,7 @@ public class ElevatorSimulator implements Serializable {
     }
     public void simulate() {
         actions = new LinkedList<>();
+
     }
     public String printActions() {
         return actions.toString();
