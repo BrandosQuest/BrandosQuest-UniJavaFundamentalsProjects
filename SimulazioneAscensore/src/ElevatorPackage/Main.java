@@ -5,6 +5,8 @@ import mylib.MenuB;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.Scanner;
 import java. util.regex.*;
 import java.io.*;
 
@@ -58,26 +60,102 @@ public class Main {
     }
 
     public static ElevatorSimulator textFileStartUp(){
-        System.out.println("LOADING FROM TEXT FILE");
+        System.out.print("LOADING FROM TEXT FILE ");
         File inputFile = new File("saves/elevatorSimulatorInitialState.txt");
         ElevatorSimulator simulator = null;
-        System.out.println("File located in " + inputFile.getPath());
-        System.out.println("File located in " + inputFile.getAbsolutePath());
+        System.out.println(inputFile.getPath());
         LinkedList<String> linesRead= new LinkedList<>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(
+            Scanner scanner = new Scanner(
                     new FileReader(inputFile));
-            while ((bufferedReader.readLine()) != null) {
-                linesRead.add(bufferedReader.readLine());
+            while (scanner.hasNext()) {
+                linesRead.add(scanner.nextLine());
             }
         }catch (IOException e){
             System.out.println("Error in reading the file, going into manual mode\n"+e.getMessage());
             simulator = manualStartUp();
         }
-        Iterator<String> iterator = linesRead.iterator();
+
+        ListIterator<String> iterator = linesRead.listIterator();
         while(iterator.hasNext()){
             String line = iterator.next();
-            System.out.println(line);
+            if(line.startsWith("!") || line.isEmpty() || line.startsWith(" ")){
+                iterator.remove();
+            }else {
+                line= line.replaceAll("_","");
+                line= line.replaceAll(",","");
+                //System.out.println(line);
+                iterator.set(line);
+            }
+        }
+        ListIterator<String> iterate = linesRead.listIterator();
+        int sectionNumber =0;
+        int floors = 0;
+        int undergroundFloors = 0;
+        int elevatorPosition = 0;
+        int maxPeopleLoad=0;
+        while(iterate.hasNext()){
+            //System.out.println(sectionNumber);
+            String line = iterate.next();
+            if(line.startsWith(">")){
+                sectionNumber++;
+                //iterator.remove();
+            }else {
+                switch (sectionNumber){
+                    case 1:
+                        floors=Integer.parseInt(line);
+                        break;
+                    case 2:
+                        undergroundFloors=Integer.parseInt(line);
+                        break;
+                    case 3:
+                        elevatorPosition=Integer.parseInt(line);
+                        break;
+                    case 4:
+                        maxPeopleLoad=Integer.parseInt(line);
+                        simulator= new ElevatorSimulator(new Building(floors, undergroundFloors), elevatorPosition, maxPeopleLoad);
+                        break;
+                    case 5:
+                        while (iterate.hasNext()){
+                            if(line.startsWith(">")){
+                                break;
+                            }
+                            assert simulator != null;
+                            int originFloor = Integer.parseInt(line.split(" ")[0]);
+                            int destinationFloor = Integer.parseInt(line.split(" ")[1]);
+                            if (originFloor != destinationFloor) {
+                                simulator.elevatorCall(originFloor, destinationFloor);
+                                //System.out.println(originFloor+" "+destinationFloor);
+                            } else {
+                                System.out.println("Call skipped, waiting floor is the same as the destination floor, fix the text file");
+                            }
+                            line = iterate.next();
+                        }
+                        iterate.previous();
+                        break;
+                    case 6:
+                        iterate.previous();
+                        while (iterate.hasNext()){
+                            line = iterate.next();
+                            if(line.startsWith(">")){
+                                break;
+                            }
+                            assert simulator != null;
+                            int destinationFloor = Integer.parseInt(line);
+                            if (elevatorPosition != destinationFloor) {
+                                simulator.elevatorCall(elevatorPosition, destinationFloor);
+                                //System.out.println(elevatorPosition+" "+destinationFloor);
+                            } else {
+                                System.out.println("Call skipped, elevator starting floor is the same as the destination floor, fix the text file");
+                            }
+
+                        }
+                        break;
+                    default:
+                        System.out.println("Something is wrong in the text file, to many sections");
+                        break;
+                }
+            }
         }
 
 
