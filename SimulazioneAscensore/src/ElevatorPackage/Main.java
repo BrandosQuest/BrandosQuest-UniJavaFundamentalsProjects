@@ -125,16 +125,26 @@ public class Main {
             String[] s = f.list(new FilenameFilter() {
                 @Override
                 public boolean accept(File dir, String name) {
-                    return dir.getName().startsWith("save") && dir.getName().endsWith("\\d");
+                    // Define the regex pattern to match a string that ends with a digit
+                    String regex = "\\d\\.txt$";
+                    // Compile the pattern
+                    Pattern pattern = Pattern.compile(regex);
+                    // Create a matcher for the input string
+                    Matcher matcher = pattern.matcher(name);
+                    // Check if the pattern matches the entire input string
+                    return name.startsWith("save") && matcher.find();
+                    //return dir.getName().startsWith("save") && dir.getName().endsWith("\\d");
                 }
             });
             int max=0;
             for (int i = 0; i < s.length; i++) {
-                s[i]=s[i].substring(3);
+                s[i]=s[i].substring(4);
+                s[i]=s[i].split(".txt")[0];
                 if(Integer.parseInt(s[i])>max){
                     max=Integer.parseInt(s[i]);
                 }
             }
+            max++;
             savingFile = new File("saves/objectSaves/save"+max+".txt");
         }else{
             savingFile = new File("saves/objectSaves/"+name+".txt");
