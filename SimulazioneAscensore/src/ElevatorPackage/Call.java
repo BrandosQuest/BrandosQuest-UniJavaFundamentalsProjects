@@ -28,6 +28,18 @@ public class Call implements Serializable {
         }
     }
 
+    public int getDestinationFloor() {
+        return destinationFloor;
+    }
+
+    public int getOriginFloor() {
+        return originFloor;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
     @Override
     public String toString() {
         return "\nCall{" +

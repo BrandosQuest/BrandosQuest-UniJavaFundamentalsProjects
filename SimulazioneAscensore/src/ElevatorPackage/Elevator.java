@@ -4,7 +4,7 @@ package ElevatorPackage;
 import java.io.Serializable;
 
 public class Elevator implements Serializable {
-    private final int position;
+    private int position;
     private final int maxPeopleLoad;
     private final int peopleLoad;
 
@@ -15,6 +15,17 @@ public class Elevator implements Serializable {
         this.position = position;
         this.maxPeopleLoad = maxPeopleLoad;
         this.peopleLoad=0;
+    }
+
+    public int position() {
+        return position;
+    }
+    public void moveOneFloor(Direction direction) {
+        if(direction == Direction.UP){
+            position++;
+        }else {
+            position--;
+        }
     }
 
     @Override

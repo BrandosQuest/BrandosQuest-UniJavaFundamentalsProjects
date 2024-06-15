@@ -21,7 +21,7 @@ public class Main {
         simulatorCalls(simulator);
         System.out.println("NOW SIMULATING!!!");
         simulator.simulate();
-        simulator.printActions();
+        System.out.println(simulator.printActions());
         //serializeDataOut(simulator);
 
     }

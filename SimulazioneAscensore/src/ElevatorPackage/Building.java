@@ -13,7 +13,7 @@ public class Building implements Serializable {
         this.undergroundFloors = undergroundFloors;
     }
     public int getHighestFloor() {
-        return floors-undergroundFloors;
+        return floors-undergroundFloors-1;//check if -1 is ok
     }
     public int getLowestFloor() {
         return -undergroundFloors;
