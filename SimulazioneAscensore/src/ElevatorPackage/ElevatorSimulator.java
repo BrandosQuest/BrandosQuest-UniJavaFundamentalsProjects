@@ -17,38 +17,70 @@ public class ElevatorSimulator implements Serializable {
         calls = new LinkedList<>();
         actions = new LinkedList<>();
     }
-    public void elevatorCall(int originFloor, int destinationFloor ) {
-        calls.add(new Call( originFloor, destinationFloor, building));
+    public void elevatorCall(int originFloor, int destinationFloor, boolean onElevator) {
+        calls.add(new Call( originFloor, destinationFloor, building, onElevator));
     }
     public void simulate() {
-        TreeMap<Integer, Float> floorPriority = new TreeMap<>();
-        for (Call call : calls) {
-            floorPriority.merge(call.getOriginFloor(), 1F, Float::sum);
-        }
-        System.out.println(floorPriority);
-        for(int i = building.getLowestFloor(); i <= building.getHighestFloor(); i++) {
-            System.out.println(i);
-        }
-        Direction direction=Direction.UP;
         while (!calls.isEmpty()) {
-            for (int i = 0; i < calls.size(); i++) {//use iterator?
-                if (calls.get(i).getOriginFloor() == elevator.position()) {
-                    actions.add("elevator lets pearson on board");
-                    direction = calls.get(i).getDirection();
+            int directionScore=0;
+            int callsMade=0;
+            int callsCompleted=0;
+            for (int i = 0; i < calls.size(); i++) {//use iterator?, remove suspicious
+                if(calls.get(i).getOriginFloor()==elevator.position()){
+                    calls.get(i).setOnElevator(true);
+                    elevator.setPeopleLoad(1);
+                    callsMade++;
                 }
-                if (calls.get(i).getDestinationFloor() == elevator.position()) {
-                    actions.add("elevator drops down a pearson");
-                    calls.remove(i);
+                if(calls.get(i).isOnElevator()){
+                    if(calls.get(i).getDestinationFloor()>elevator.position()){
+                        directionScore++;
+                    }else if(calls.get(i).getDestinationFloor()==elevator.position()) {
+                        elevator.setPeopleLoad(-1);
+                        callsCompleted++;
+                        calls.remove(i);
+                        continue;
+                    }else {
+                        directionScore--;
+                    }
+                }else {
+                    if(calls.get(i).getOriginFloor()>elevator.position()){
+                        directionScore++;
+                    }else if(calls.get(i).getOriginFloor()<elevator.position()) {
+                        directionScore--;
+                    } /*else {
+                        directionScore--;
+                    }*/
                 }
             }
-            elevator.moveOneFloor(direction);
+            System.out.println(elevator.position());
+            actions.add("\n"+"Elevator at floor "+elevator.position());
+            actions.add("Calls made: "+callsMade);
+            actions.add("Calls completed: "+callsCompleted);
+            actions.add("People on elevator:"+elevator.getPeopleLoad());
+            actions.add("directionScore: "+directionScore);
+            if(directionScore>0) {
+                elevator.moveOneFloor(Direction.UP);
+            }if(directionScore==0) {//check if it's right
+                elevator.moveOneFloor(Direction.UP);
+            }if(directionScore<0){
+                elevator.moveOneFloor(Direction.DOWN);
+            }
         }
+
+        /*il piano toccato dall'ascensore,
+● quante persone scendono e salgono
+● quante persone sono presenti sull'ascensore*/
     }
     public String printActions() {
+
         return actions.toString();
     }
     public Building getBuilding() {
         return building;
+    }
+
+    public int getElevatorPosition() {
+        return elevator.position();
     }
 
     @Override

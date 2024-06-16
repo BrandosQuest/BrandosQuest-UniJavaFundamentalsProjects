@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SimulatorFileUtils {
-    public static ElevatorSimulator textFileStartUp(){
+    public static ElevatorSimulator textFileStartUp(){ // check for limits on min number of calls in file, print message
         System.out.print("LOADING FROM TEXT FILE ");
         File inputFile = new File("saves/elevatorSimulatorInitialState.txt");
         ElevatorSimulator simulator = null;
@@ -76,7 +76,7 @@ public class SimulatorFileUtils {
                             int originFloor = Integer.parseInt(line.split(" ")[0]);
                             int destinationFloor = Integer.parseInt(line.split(" ")[1]);
                             if (originFloor != destinationFloor) {
-                                simulator.elevatorCall(originFloor, destinationFloor);
+                                simulator.elevatorCall(originFloor, destinationFloor,false);//"Destination floor is out of bounds in respect to the building floors numbers");
                                 //System.out.println(originFloor+" "+destinationFloor);
                             } else {
                                 System.out.println("Call skipped, waiting floor is the same as the destination floor, fix the text file");
@@ -95,7 +95,7 @@ public class SimulatorFileUtils {
                             assert simulator != null;
                             int destinationFloor = Integer.parseInt(line);
                             if (elevatorPosition != destinationFloor) {
-                                simulator.elevatorCall(elevatorPosition, destinationFloor);
+                                simulator.elevatorCall(elevatorPosition, destinationFloor, true);
                                 //System.out.println(elevatorPosition+" "+destinationFloor);
                             } else {
                                 System.out.println("Call skipped, elevator starting floor is the same as the destination floor, fix the text file");

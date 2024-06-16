@@ -8,14 +8,13 @@ _5
 >Elevator starting floor, comprised in the building floors
 _0
 >Maximum people load of the elevator, at least one person
-_4
->People waiting, (_waitingFloor, destinationFloor), comprised in the building floors, different from one another
-_0, 4
-_0, 6
-_-2, -3
-_4, -4
-_9, -3
->People already on the elevator, (_destinationFloor), comprised in the building floors, different from the elevator starting floor
+_6
+>People waiting, at least 5, (_waitingFloor, destinationFloor), comprised in the building floors, different from one another
+_3, 4
+4, 1
+0, -5
+-1, -2
+0, 9
+0, 9
+>People already on the elevator,at least 3 , (_destinationFloor), comprised in the building floors, different from the elevator starting floor
 _9
-_-3
-_5

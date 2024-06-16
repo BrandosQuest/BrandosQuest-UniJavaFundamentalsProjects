@@ -86,7 +86,7 @@ public class Main {
                                 "enter the destination floor of the call, different from the origin "+originFloor+
                                         " - between "+simulator.getBuilding().getLowestFloor()+" and "+simulator.getBuilding().getHighestFloor());
                     } while (destinationFloor==originFloor);
-                    simulator.elevatorCall(originFloor, destinationFloor);
+                    simulator.elevatorCall(originFloor, destinationFloor, originFloor == simulator.getElevatorPosition());
                     System.out.println(simulator);
                     break;
                 case 2:
