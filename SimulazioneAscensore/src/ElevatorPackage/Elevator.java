@@ -12,6 +12,9 @@ public class Elevator implements Serializable {
         if(!(position>= building.getLowestFloor() && position<= building.getHighestFloor())){
             throw new IllegalArgumentException("Elevator position is out of bounds in respect to the building floors numbers");
         }
+        if(maxPeopleLoad<1){
+            throw new IllegalArgumentException("The max people load is less than 1, must be greater");
+        }
         this.position = position;
         this.maxPeopleLoad = maxPeopleLoad;
         this.peopleLoad=0;
@@ -36,11 +39,11 @@ public class Elevator implements Serializable {
     }
 
     public void setPeopleLoad(int peopleLoad) throws IllegalArgumentException{
-        this.peopleLoad = this.peopleLoad+peopleLoad;
-        if(this.peopleLoad>maxPeopleLoad || this.peopleLoad<0){
-            this.peopleLoad--;
-            throw new IllegalArgumentException("Elevator load is out of bounds in respect to the maximum people load");
+        if(this.peopleLoad+peopleLoad>maxPeopleLoad || this.peopleLoad+peopleLoad<0){
+            //this.peopleLoad--;
+            throw new IllegalArgumentException("Elevator load "+(this.peopleLoad+peopleLoad)+" is out of bounds in respect to the maximum people load "+maxPeopleLoad);
         }
+        this.peopleLoad = this.peopleLoad+peopleLoad;
     }
 
     @Override

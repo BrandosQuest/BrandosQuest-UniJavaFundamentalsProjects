@@ -9,7 +9,7 @@ public class Call implements Serializable {
     private boolean onElevator;
     private boolean skipped;
 
-    public Call(int originFloor, int destinationFloor, Building building, boolean onElevator) {
+    public Call(int originFloor, int destinationFloor, Building building) {
         if(!(originFloor>=building.getLowestFloor() && originFloor<=building.getHighestFloor())){
             throw new IllegalArgumentException("Origin floor is out of bounds in respect to the building floors numbers");
         }
@@ -19,7 +19,7 @@ public class Call implements Serializable {
         this.originFloor = originFloor;
         this.destinationFloor = destinationFloor;
         determineDirection();
-        this.onElevator = onElevator;
+        this.onElevator = false;
     }
 
     public void setOnElevator(boolean onElevator) {

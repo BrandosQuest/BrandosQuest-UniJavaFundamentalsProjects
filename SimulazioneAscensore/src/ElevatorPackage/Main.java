@@ -19,6 +19,7 @@ public class Main {
 
         System.out.println(simulator);
         simulatorCalls(simulator);
+        //InputDatiB.nextStringLine("Hit any key to simulate");
         System.out.println("NOW SIMULATING!!!");
         simulator.simulate();
         System.out.println(simulator.printActions());
@@ -86,7 +87,7 @@ public class Main {
                                 "enter the destination floor of the call, different from the origin "+originFloor+
                                         " - between "+simulator.getBuilding().getLowestFloor()+" and "+simulator.getBuilding().getHighestFloor());
                     } while (destinationFloor==originFloor);
-                    simulator.elevatorCall(originFloor, destinationFloor, originFloor == simulator.getElevatorPosition());
+                    simulator.elevatorCall(originFloor, destinationFloor);
                     System.out.println(simulator);
                     break;
                 case 2:

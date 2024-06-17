@@ -76,7 +76,7 @@ public class SimulatorFileUtils {
                             int originFloor = Integer.parseInt(line.split(" ")[0]);
                             int destinationFloor = Integer.parseInt(line.split(" ")[1]);
                             if (originFloor != destinationFloor) {//add that on elevator could be true if elevatorPosition == originFloor
-                                simulator.elevatorCall(originFloor, destinationFloor,false);//"Destination floor is out of bounds in respect to the building floors numbers");
+                                simulator.elevatorCall(originFloor, destinationFloor);//"Destination floor is out of bounds in respect to the building floors numbers");
                                 //System.out.println(originFloor+" "+destinationFloor);
                             } else {
                                 System.out.println("Call skipped, waiting floor is the same as the destination floor, fix the text file");
@@ -95,11 +95,12 @@ public class SimulatorFileUtils {
                             assert simulator != null;
                             int destinationFloor = Integer.parseInt(line);
                             if (elevatorPosition != destinationFloor) {
-                                try {
+                                /*try {
                                     simulator.elevatorCall(elevatorPosition, destinationFloor, true);
                                 } catch (IllegalArgumentException e) {
-                                    simulator.elevatorCall(elevatorPosition, destinationFloor, false);
-                                }
+                                    simulator.elevatorCall(elevatorPosition, destinationFloor, false);              ?
+                                }*/
+                                simulator.elevatorCall(elevatorPosition, destinationFloor);
                                 //System.out.println(elevatorPosition+" "+destinationFloor);
                             } else {
                                 System.out.println("Call skipped, elevator starting floor is the same as the destination floor, fix the text file");
