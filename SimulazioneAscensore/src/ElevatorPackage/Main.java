@@ -19,10 +19,22 @@ public class Main {
 
         System.out.println(simulator);
         simulatorCalls(simulator);
-        //InputDatiB.nextStringLine("Hit any key to simulate");
+        String mode=InputDatiB.nextStringLine("Hit any key to simulate or \"s\" to execute a step by step simulation");
         System.out.println("NOW SIMULATING!!!");
-        simulator.simulate();
-        System.out.println(simulator.printActions());
+        if(mode.equalsIgnoreCase("s")){
+            System.out.println("Enter \"help\" for executing an emergency stop");
+            String step=" ";
+            String command="";
+            while (!step.isEmpty()) {
+                step=simulator.simulateAStep(command);
+                System.out.println(step);
+                command=InputDatiB.nextStringLine();
+            }
+        }else {
+            simulator.simulate();
+            System.out.println(simulator.printActions());
+        }
+
         //serializeDataOut(simulator);
 
     }

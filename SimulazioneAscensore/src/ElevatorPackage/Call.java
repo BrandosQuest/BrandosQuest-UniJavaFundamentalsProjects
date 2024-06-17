@@ -3,7 +3,7 @@ package ElevatorPackage;
 import java.io.Serializable;
 
 public class Call implements Serializable {
-    private final int originFloor;
+    private int originFloor;
     private final int destinationFloor;
     private Direction direction;
     private boolean onElevator;
@@ -58,6 +58,10 @@ public class Call implements Serializable {
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public void setOriginFloor(int originFloor) {
+        this.originFloor = originFloor;
     }
 
     @Override

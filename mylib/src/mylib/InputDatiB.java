@@ -328,6 +328,14 @@ public class InputDatiB
 		} while (r.isEmpty());
 		return r;
 	}
+	/**
+	 * Method used to ask the user for a String
+	 *
+	 * @return the String entered by the user, whole line
+	 */
+	public static String nextStringLine(){
+        return scanner.nextLine();
+	}
 	/*
 	  
  
