@@ -7,6 +7,7 @@ public class Call implements Serializable {
     private final int destinationFloor;
     private Direction direction;
     private boolean onElevator;
+    private boolean skipped;
 
     public Call(int originFloor, int destinationFloor, Building building, boolean onElevator) {
         if(!(originFloor>=building.getLowestFloor() && originFloor<=building.getHighestFloor())){
@@ -27,6 +28,14 @@ public class Call implements Serializable {
 
     public boolean isOnElevator() {
         return onElevator;
+    }
+
+    public void setSkipped(boolean skipped) {
+        this.skipped = skipped;
+    }
+
+    public boolean wasSkipped() {
+        return skipped;
     }
 
     private void determineDirection() {
@@ -58,6 +67,7 @@ public class Call implements Serializable {
                 ", destinationFloor=" + destinationFloor +
                 ", direction=" + direction +
                 ", onElevator=" + onElevator +
+                ", skipped=" + skipped +
                 '}';
     }
 }

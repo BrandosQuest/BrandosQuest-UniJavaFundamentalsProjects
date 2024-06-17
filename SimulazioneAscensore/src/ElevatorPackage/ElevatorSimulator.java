@@ -17,12 +17,16 @@ public class ElevatorSimulator implements Serializable {
         calls = new LinkedList<>();
         actions = new LinkedList<>();
     }
-    public void elevatorCall(int originFloor, int destinationFloor, boolean onElevator) {
+    public void elevatorCall(int originFloor, int destinationFloor, boolean onElevator) throws IllegalArgumentException {
+        if (onElevator) {
+            elevator.setPeopleLoad(1);
+        }
         calls.add(new Call( originFloor, destinationFloor, building, onElevator));//if on elevator add to people on elevator
     }
     public void simulate() {
-        //int counter=0;
-        while (!calls.isEmpty()) {
+        int counter=0;
+        Direction previousDirection = null;// Direction.UP//if it starts at the top???
+        while (!calls.isEmpty()&& counter<100) {//this cycles until there's no call left
             int directionScore=0;
             int callsMade=0;
             int callsCompleted=0;
@@ -30,7 +34,10 @@ public class ElevatorSimulator implements Serializable {
             ListIterator<Call> iterator = calls.listIterator();
             while (iterator.hasNext()) {
                 Call call = iterator.next();
-                if(call.getOriginFloor()==elevator.position()){
+                if (elevator.position()==call.getOriginFloor() || elevator.getPeopleLoad()==0){
+                    call.setSkipped(false);
+                }
+                if(call.getOriginFloor()==elevator.position()){//this tries to take calls on the elevator
                     //call.setOnElevator(true);
                     try {
                         elevator.setPeopleLoad(1);//but they should be already on elevator
@@ -38,21 +45,25 @@ public class ElevatorSimulator implements Serializable {
                         callsMade++;
                     } catch (IllegalArgumentException e) {
                         callsSkipped++;
+                        call.setSkipped(true);
                     }
                     //callsMade++;
                 }
-                if(call.isOnElevator()){
+                //if(call.isOnElevator() && !call.wasSkipped()){
+                if(call.isOnElevator()){//if the call is on elevator
                     if(call.getDestinationFloor()>elevator.position()){
                         directionScore++;
+                    //}else if(call.getDestinationFloor()==elevator.position() && call.isOnElevator()) {
                     }else if(call.getDestinationFloor()==elevator.position()) {
                         elevator.setPeopleLoad(-1);
                         callsCompleted++;
                         iterator.remove();
                         continue;
-                    }else {
+                    }else if (call.getDestinationFloor()<elevator.position()){
                         directionScore--;
                     }
-                }else {
+                //}else if (!call.wasSkipped() && elevator.getPeopleLoad()<elevator.getMaxPeopleLoad()){
+                }else if (!call.wasSkipped() && elevator.getPeopleLoad()<elevator.getMaxPeopleLoad()){//if the call is not on the elevator and wasn't skipped and the elevator is not full
                     if(call.getOriginFloor()>elevator.position()){
                         directionScore++;
                     }else if(call.getOriginFloor()<elevator.position()) {
@@ -62,32 +73,50 @@ public class ElevatorSimulator implements Serializable {
                     }*/
                 }
             }
-            /*counter++;
-            if(counter==16) {
-                System.out.println("a");
-            }*/
+            counter++;
             //System.out.println(elevator.position());
             String buffer = "\n" + "Elevator at floor " + elevator.position() +
-                    " Calls made: " + callsMade +
-                    " Calls completed: " + callsCompleted +
-                    " People on elevator:" + elevator.getPeopleLoad() +
-                    " directionScore: " + directionScore;//temporary
+                    ", Calls made: " + callsMade +
+                    ", Calls completed: " + callsCompleted +
+                    ", People on elevator:" + elevator.getPeopleLoad() +
+                    ", directionScore: " + directionScore;//temporary
             if(callsSkipped>0){
-                buffer = buffer + " Skipped calls due to exceeding the weight limit: " + callsSkipped;
+                buffer = buffer + ", Skipped calls due to exceeding the weight limit: " + callsSkipped;
             }
-            System.out.println(buffer);
+            //System.out.println(buffer);
             actions.add(buffer);
             /*actions.add("\n"+"Elevator at floor "+elevator.position());
             actions.add("Calls made: "+callsMade);
             actions.add("Calls completed: "+callsCompleted);
             actions.add("People on elevator:"+elevator.getPeopleLoad());
             actions.add("directionScore: "+directionScore);*/
-            if(directionScore>0) {
+            /*if(directionScore>0) {
                 elevator.moveOneFloor(Direction.UP);
-            }if(directionScore==0) {//check if it's right
-                elevator.moveOneFloor(Direction.UP);
-            }if(directionScore<0){
+            }else if(directionScore<0){
                 elevator.moveOneFloor(Direction.DOWN);
+            }else if(directionScore==0){
+                elevator.moveOneFloor(Direction.UP);//or move the last move?
+            }else if(elevator.position()==building.getHighestFloor()) {//check if it's right
+                elevator.moveOneFloor(Direction.DOWN);
+            }else if(elevator.position()==building.getLowestFloor()) {//check if it's right
+                elevator.moveOneFloor(Direction.UP);
+            }*/
+
+
+            if(elevator.position()==building.getHighestFloor()) {//check if it's right
+                elevator.moveOneFloor(Direction.DOWN);
+                previousDirection=Direction.DOWN;
+            }else if(elevator.position()==building.getLowestFloor()) {//check if it's right
+                elevator.moveOneFloor(Direction.UP);
+                previousDirection=Direction.UP;
+            }else if(directionScore>0) {
+                elevator.moveOneFloor(Direction.UP);
+                previousDirection=Direction.UP;
+            }else if(directionScore<0){
+                elevator.moveOneFloor(Direction.DOWN);
+                previousDirection=Direction.DOWN;
+            }else {
+                elevator.moveOneFloor(previousDirection);//or move the last move?
             }
         }
 

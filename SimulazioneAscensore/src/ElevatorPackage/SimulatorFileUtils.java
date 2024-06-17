@@ -95,7 +95,11 @@ public class SimulatorFileUtils {
                             assert simulator != null;
                             int destinationFloor = Integer.parseInt(line);
                             if (elevatorPosition != destinationFloor) {
-                                simulator.elevatorCall(elevatorPosition, destinationFloor, true);
+                                try {
+                                    simulator.elevatorCall(elevatorPosition, destinationFloor, true);
+                                } catch (IllegalArgumentException e) {
+                                    simulator.elevatorCall(elevatorPosition, destinationFloor, false);
+                                }
                                 //System.out.println(elevatorPosition+" "+destinationFloor);
                             } else {
                                 System.out.println("Call skipped, elevator starting floor is the same as the destination floor, fix the text file");

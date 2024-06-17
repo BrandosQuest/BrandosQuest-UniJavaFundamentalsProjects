@@ -30,9 +30,14 @@ public class Elevator implements Serializable {
     public int getPeopleLoad() {
         return peopleLoad;
     }
-    public void setPeopleLoad(int peopleLoad) {
+
+    public int getMaxPeopleLoad() {
+        return maxPeopleLoad;
+    }
+
+    public void setPeopleLoad(int peopleLoad) throws IllegalArgumentException{
         this.peopleLoad = this.peopleLoad+peopleLoad;
-        if(this.peopleLoad>maxPeopleLoad){
+        if(this.peopleLoad>maxPeopleLoad || this.peopleLoad<0){
             this.peopleLoad--;
             throw new IllegalArgumentException("Elevator load is out of bounds in respect to the maximum people load");
         }
