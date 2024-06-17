@@ -3,10 +3,17 @@ package ElevatorPackage;
 import mylib.InputDatiB;
 import mylib.MenuB;
 
-
+/**
+ * The Main class of my project, Simulazione Ascensore, containing the runnable main method, all the user inputs occur here
+ *
+ * @author brando
+ */
 public class Main {
-    public static void main(String[] args){//remove throws
-
+    /**
+     * The runnable method of my project, where the elevator is declared, and the methods for calls and simulating are called
+     * @param args the parameters of the main method, where the execution starts
+     */
+    public static void main(String[] args){
         ElevatorSimulator simulator;
         greetings();
         simulator=simulatorStartUp();
@@ -34,14 +41,18 @@ public class Main {
             simulator.simulate();
             System.out.println(simulator.printActions());
         }
-
-        //serializeDataOut(simulator);
-
     }
-    public static void greetings(){
+    /**
+     * Greetings for the user
+     */
+    private static void greetings(){
         System.out.println("ELEVATOR SIMULATOR!!!");
     }
-    public static ElevatorSimulator simulatorStartUp(){
+    /**this method returns the instance of ElevatorSimulator where the simulation will be run,
+     * it can come from a text file, a saved simulation, or entered step by step by the used
+     * @return the initialized instance of ElevatorSimulator
+     */
+    private static ElevatorSimulator simulatorStartUp(){
         MenuB menuB = new MenuB("loading options", new String[] {"Load from text file","Load from a saved simulation", "Manual mode"});
         menuB.printMenuPlusQuit();
         int choice=InputDatiB.nextInt(0, 3, 3);
@@ -69,10 +80,15 @@ public class Main {
         }
         return simulator;
     }
-    public static ElevatorSimulator manualStartUp(){//look at the order of the inputs and at people load, could be problematic
+
+    /**Method that asks the user for the parameters of our simulation, with attention to incorrect inputs,
+     * It's the backup for the failing of the loading of a simulator from a save or from a text file
+     * @return the initialized instance of ElevatorSimulator
+     */
+    private static ElevatorSimulator manualStartUp(){
         System.out.println("MANUAL MODE");
-        Building building = new Building(InputDatiB.nextInt(10, "enter the number of floors of the building - at least 10"),//improve this  line, with handling for inputs ad 1 1
-                InputDatiB.nextInt(0,10, "enter the number of underground floors of the building - no more than 10"));//improve this  line, with limits to the input
+        Building building = new Building(InputDatiB.nextInt(10, "enter the number of floors of the building - at least 10"),
+                InputDatiB.nextInt(0,10, "enter the number of underground floors of the building - no more than 10"));
         ElevatorSimulator simulator = new ElevatorSimulator
                 (building,
                         InputDatiB.nextInt(building.getLowestFloor(), building.getHighestFloor(),
@@ -83,7 +99,11 @@ public class Main {
         }
         return simulator;
     }
-    public static void simulatorCalls(ElevatorSimulator simulator){
+
+    /**Method that asks the user for calls of the elevator, using 2 integers as to represent the floor in witch the call is made and the floor to witch is going
+     * @param simulator an ElevatorSimulator object, storing the calls for the simulation later
+     */
+    private static void simulatorCalls(ElevatorSimulator simulator){
         MenuB menuB = new MenuB("ELEVATORCALLS",new String[]{"enter new elevator call", "save the current state of the simulation"});
         menuB.printMenuPlusQuit();
         int choice=InputDatiB.nextInt(0, 2);

@@ -70,8 +70,8 @@ public class Call implements Serializable {
                 "originFloor=" + originFloor +
                 ", destinationFloor=" + destinationFloor +
                 ", direction=" + direction +
-                ", onElevator=" + onElevator +
-                ", skipped=" + skipped +
+                //", onElevator=" + onElevator +
+                //", skipped=" + skipped +
                 '}';
     }
 }

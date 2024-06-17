@@ -126,8 +126,8 @@ public class ElevatorSimulator implements Serializable {
             buffer.append("\n" + "Elevator at floor " + elevator.position() +
                     ", Calls made: " + callsMade +
                     ", Calls completed: " + callsCompleted +
-                    ", People on elevator:" + elevator.getPeopleLoad() +
-                    ", directionScore: " + directionScore);//temporary
+                    ", People on elevator:" + elevator.getPeopleLoad());
+                    //", directionScore: " + directionScore);//temporary
             if(callsSkipped>0){
                 buffer.append(", Skipped calls(due to exceeding the weight limit): ").append(callsSkipped);
             }
@@ -192,17 +192,6 @@ public class ElevatorSimulator implements Serializable {
     public int getElevatorPosition() {
         return elevator.position();
     }
-
-    @Override
-    public String toString() {
-        return "ElevatorSimulator{" +
-                "\nelevator=" + elevator +
-                ", \nbuilding=" + building +
-                ", \ncalls=" + calls +
-                ", \nactions=" + actions +
-                '}';
-    }
-
     public String simulateAStep(String command) {
         //Direction previousDirection = null;// Direction.UP//if it starts at the top???
         if (!calls.isEmpty()) {//this cycles until there's no call left
@@ -319,8 +308,8 @@ public class ElevatorSimulator implements Serializable {
             buffer.append("\n" + "Elevator at floor " + elevator.position() +
                     ", Calls made: " + callsMade +
                     ", Calls completed: " + callsCompleted +
-                    ", People on elevator:" + elevator.getPeopleLoad() +
-                    ", directionScore: " + directionScore);//temporary
+                    ", People on elevator:" + elevator.getPeopleLoad());
+                    //", directionScore: " + directionScore);//temporary
             if(callsSkipped>0){
                 buffer.append(", Skipped calls(due to exceeding the weight limit): ").append(callsSkipped);
             }
@@ -374,4 +363,15 @@ public class ElevatorSimulator implements Serializable {
             return "";
         }
     }
+    @Override
+    public String toString() {
+        return "ElevatorSimulator{" +
+                "\nelevator=" + elevator +
+                ", \nbuilding=" + building +
+                ", \ncalls=" + calls +
+                ", \nactions=" + actions +
+                '}';
+    }
+
+
 }
