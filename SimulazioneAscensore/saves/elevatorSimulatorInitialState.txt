@@ -13,8 +13,5 @@ _6
 _3, 4
 4, 1
 0, -5
--1, -2
-0, 9
-0, 9
 >People already on the elevator,at least 3 , (_destinationFloor), comprised in the building floors, different from the elevator starting floor
 _9

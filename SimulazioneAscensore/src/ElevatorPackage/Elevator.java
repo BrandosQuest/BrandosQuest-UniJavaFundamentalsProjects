@@ -42,6 +42,7 @@ public class Elevator implements Serializable {
         return "Elevator{" +
                 "position=" + position +
                 ", maxPeopleLoad=" + maxPeopleLoad +
+                ", peopleLoad=" + peopleLoad +
                 '}';
     }
 }

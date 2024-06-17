@@ -75,7 +75,7 @@ public class SimulatorFileUtils {
                             assert simulator != null;
                             int originFloor = Integer.parseInt(line.split(" ")[0]);
                             int destinationFloor = Integer.parseInt(line.split(" ")[1]);
-                            if (originFloor != destinationFloor) {
+                            if (originFloor != destinationFloor) {//add that on elevator could be true if elevatorPosition == originFloor
                                 simulator.elevatorCall(originFloor, destinationFloor,false);//"Destination floor is out of bounds in respect to the building floors numbers");
                                 //System.out.println(originFloor+" "+destinationFloor);
                             } else {
