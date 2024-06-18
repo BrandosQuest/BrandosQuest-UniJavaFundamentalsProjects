@@ -10,8 +10,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A utils class, used to load or save and Elevator Simulation object using static methods
+ *
+ * @author brando
+ */
 public class SimulatorFileUtils {
-    public static ElevatorSimulator textFileStartUp(){ // check for limits on min number of calls in file, print message
+    /**This static method takes a text file saved in a specific folder and converts its contents in an Elevator simulator object
+     * @return The elevatorSimulator object or null in case of an error(printed to the user)
+     */
+    public static ElevatorSimulator textFileStartUp(){
         System.out.print("LOADING FROM TEXT FILE ");
         File inputFile = new File("saves/elevatorSimulatorInitialState.txt");
         ElevatorSimulator simulator = null;
@@ -36,7 +44,6 @@ public class SimulatorFileUtils {
             }else {
                 line= line.replaceAll("_","");
                 line= line.replaceAll(",","");
-                //System.out.println(line);
                 iterator.set(line);
             }
         }
@@ -46,12 +53,12 @@ public class SimulatorFileUtils {
         int undergroundFloors = 0;
         int elevatorPosition = 0;
         int maxPeopleLoad;
+        int peopleWaiting=0;//People waiting, at least 5
+        int peopleAlreadyOnElevator=0;//People already on the elevator,at least 3
         while(iterate.hasNext()){
-            //System.out.println(sectionNumber);
             String line = iterate.next();
             if(line.startsWith(">")){
                 sectionNumber++;
-                //iterator.remove();
             }else {
                 switch (sectionNumber){
                     case 1:
@@ -75,9 +82,14 @@ public class SimulatorFileUtils {
                             assert simulator != null;
                             int originFloor = Integer.parseInt(line.split(" ")[0]);
                             int destinationFloor = Integer.parseInt(line.split(" ")[1]);
-                            if (originFloor != destinationFloor) {//add that on elevator could be true if elevatorPosition == originFloor
-                                simulator.elevatorCall(originFloor, destinationFloor);//"Destination floor is out of bounds in respect to the building floors numbers");
-                                //System.out.println(originFloor+" "+destinationFloor);
+                            if (originFloor != destinationFloor) {
+                                try {
+                                    simulator.elevatorCall(originFloor, destinationFloor);
+                                } catch (IllegalArgumentException e) {
+                                    System.out.println("waitingFloor or destinationFloor are not comprised in the floors of the building, fix the text file");
+                                    return null;
+                                }
+                                peopleWaiting++;
                             } else {
                                 System.out.println("Call skipped, waiting floor is the same as the destination floor, fix the text file");
                             }
@@ -95,13 +107,13 @@ public class SimulatorFileUtils {
                             assert simulator != null;
                             int destinationFloor = Integer.parseInt(line);
                             if (elevatorPosition != destinationFloor) {
-                                /*try {
-                                    simulator.elevatorCall(elevatorPosition, destinationFloor, true);
+                                try {
+                                    simulator.elevatorCall(elevatorPosition, destinationFloor);
                                 } catch (IllegalArgumentException e) {
-                                    simulator.elevatorCall(elevatorPosition, destinationFloor, false);              ?
-                                }*/
-                                simulator.elevatorCall(elevatorPosition, destinationFloor);
-                                //System.out.println(elevatorPosition+" "+destinationFloor);
+                                    System.out.println("destinationFloor is not comprised in the floors of the building, fix the text file");
+                                    return null;
+                                }
+                                peopleAlreadyOnElevator++;
                             } else {
                                 System.out.println("Call skipped, elevator starting floor is the same as the destination floor, fix the text file");
                             }
@@ -114,8 +126,16 @@ public class SimulatorFileUtils {
                 }
             }
         }
+        if(peopleWaiting<5 || peopleAlreadyOnElevator<3){
+            System.out.println("Not enough people waiting for the elevator of already on the elevator at the start, fix the text file");
+            return null;
+        }
         return simulator;
     }
+
+    /**This static method takes a text file specified by the user and converts its contents in an Elevator simulator object, using the ObjectInputStream stream
+     * @return The elevatorSimulator object or null in case of an error(printed to the user)
+     */
     public static ElevatorSimulator savedStartUp(){
         System.out.println("LOADING FROM PAST SAVED SIMULATION");
         String name = InputDatiB.nextStringLine("enter the name of the saved simulation or D to use the last default save (\"save+numberSave\")");
@@ -142,6 +162,10 @@ public class SimulatorFileUtils {
 
         return simulator;
     }
+
+    /**This static method saves a ElevatorSimulator and saves it in a text file
+     * @param simulator The ElevatorSimulator object to save
+     */
     public static void saveSimulation(ElevatorSimulator simulator){
         System.out.println("SAVING CURRENT SIMULATION");
         String name = InputDatiB.nextStringLine("enter a name for the save or D to use the default \"save+numberSave\"");
@@ -164,6 +188,11 @@ public class SimulatorFileUtils {
             System.out.println("Save failed\n"+e.getMessage());
         }
     }
+
+    /**This static method is called by other methods in the class, it finds the biggest number used in the automatic saves, for automatic saves and loading actions
+     * @param f The directory in witch to search for the biggest number
+     * @return the biggest number used in the automatic saves, for automatic saves and loading actions
+     */
     private static int determineMaxIdOfSaves(File f){
         String[] s = f.list(new FilenameFilter() {
             @Override

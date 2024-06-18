@@ -7,7 +7,7 @@ import java.util.Queue;
 
 /**
  * The class that represents the simulator, and houses all the logic for the decisions in the elevator movement
- *
+ * Implements the Serializable interface to enable this class to bne saved
  * @author brando
  */
 public class ElevatorSimulator implements Serializable {
@@ -26,7 +26,7 @@ public class ElevatorSimulator implements Serializable {
     /**
      *Represents the list of steps that the elevator must execute to complete the calls
      */
-    private Queue<String> actions;
+    private final Queue<String> actions;
     /**
      *A direction object used to store the value of the previous movement in case of the use of the simulateAStep method
      */
@@ -96,7 +96,7 @@ public class ElevatorSimulator implements Serializable {
                 if (elevator.position()==call.getOriginFloor() || elevator.getPeopleLoad()==0){
                     call.setSkipped(false);
                 }
-                if (!call.isOnElevator() && !call.wasSkipped() && elevator.getPeopleLoad()<elevator.getMaxPeopleLoad()){//if the call is not on the elevator and wasn't skipped and the elevator is not full
+                if (!call.isOnElevator() && call.wasNotSkipped() && elevator.getPeopleLoad()<elevator.getMaxPeopleLoad()){//if the call is not on the elevator and wasn't skipped and the elevator is not full
                     if(call.getOriginFloor()>elevator.position()){
                         directionScore++;
                     }else if(call.getOriginFloor()<elevator.position()) {
@@ -130,10 +130,8 @@ public class ElevatorSimulator implements Serializable {
             int callsSkipped=0;
             if(command.equalsIgnoreCase("help")){
                 elevator.setPeopleLoad(-elevator.getPeopleLoad());
-                ListIterator<Call> iterator = calls.listIterator();
-                while (iterator.hasNext()) {
-                    Call call = iterator.next();
-                    if(call.isOnElevator()){
+                for (Call call : calls) {
+                    if (call.isOnElevator()) {
                         call.setOriginFloor(elevator.position());
                     }
                     call.setOnElevator(false);
@@ -167,7 +165,7 @@ public class ElevatorSimulator implements Serializable {
                     if (elevator.position()==call.getOriginFloor() || elevator.getPeopleLoad()==0){
                         call.setSkipped(false);
                     }
-                    if (!call.isOnElevator() && !call.wasSkipped() && elevator.getPeopleLoad()<elevator.getMaxPeopleLoad()){//if the call is not on the elevator and wasn't skipped and the elevator is not full
+                    if (!call.isOnElevator() && call.wasNotSkipped() && elevator.getPeopleLoad()<elevator.getMaxPeopleLoad()){//if the call is not on the elevator and wasn't skipped and the elevator is not full
                         if(call.getOriginFloor()>elevator.position()){
                             directionScore++;
                         }else if(call.getOriginFloor()<elevator.position()) {

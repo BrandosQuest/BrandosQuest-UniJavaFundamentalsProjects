@@ -59,7 +59,12 @@ public class Main {
         ElevatorSimulator simulator = null;
         switch(choice){
             case 1:
-                simulator = SimulatorFileUtils.textFileStartUp();
+                try {
+                    simulator = SimulatorFileUtils.textFileStartUp();
+                } catch (Exception e) {
+                    System.out.println("An error occurred, fix the text file "+e.getMessage());
+                    simulator = manualStartUp();
+                }
                 if(simulator==null){
                     simulator = manualStartUp();
                 }

@@ -12,6 +12,10 @@ _2
 >People waiting, at least 5, (_waitingFloor, destinationFloor), comprised in the building floors, different from one another
 _45, -3
 _33, 34
+_20, 12
 _20, 25
->People already on the elevator,at least 3 , (_destinationFloor), comprised in the building floors, different from the elevator starting floor
+_20, 25
+>People already on the elevator,at least 3, (_destinationFloor), comprised in the building floors, different from the elevator starting floor
 _-3
+_-4
+_43
