@@ -6,12 +6,12 @@ _55
 >Number of underground floors
 _5
 >Elevator starting floor, comprised in the building floors
-_45
+_49
 >Maximum people load of the elevator, at least one person
 _2
 >People waiting, at least 5, (_waitingFloor, destinationFloor), comprised in the building floors, different from one another
-45, -3
-33, 34
-20, 25
+_45, -3
+_33, 34
+_20, 25
 >People already on the elevator,at least 3 , (_destinationFloor), comprised in the building floors, different from the elevator starting floor
--3
+_-3
