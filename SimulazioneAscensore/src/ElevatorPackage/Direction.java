@@ -6,5 +6,12 @@ package ElevatorPackage;
  * @author brando
  */
 public enum Direction {
-    UP, DOWN
+    /**
+     * Representing the up direction
+     */
+    UP,
+    /**
+     * Representing the down direction
+     */
+ DOWN
 }
