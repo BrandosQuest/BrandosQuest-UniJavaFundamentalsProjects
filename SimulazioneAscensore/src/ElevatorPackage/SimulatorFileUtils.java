@@ -209,6 +209,9 @@ public class SimulatorFileUtils {
             }
         });
         int max=0;
+        if(s==null){
+            return 0;
+        }
         for (int i = 0; i < Objects.requireNonNull(s).length; i++) {
             s[i]=s[i].substring(4);
             s[i]=s[i].split(".txt")[0];
