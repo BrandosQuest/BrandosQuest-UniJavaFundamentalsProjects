@@ -1,6 +1,6 @@
 package ElevatorPackage;
 
-import mylib.InputDatiB;
+import MyLib.InputDatiB;
 
 import java.io.*;
 import java.util.LinkedList;

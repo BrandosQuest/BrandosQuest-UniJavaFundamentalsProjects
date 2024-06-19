@@ -1,7 +1,7 @@
 package ElevatorPackage;
 
-import mylib.InputDatiB;
-import mylib.MenuB;
+import MyLib.InputDatiB;
+import MyLib.MenuB;
 
 /**
  * The Main class of my project, Simulazione Ascensore, containing the runnable main method, all the user inputs occur here
