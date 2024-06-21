@@ -2,20 +2,20 @@
 !!! Try to test for liminal cases
 
 >Number of building floors, more than 10
-_55
+_30
 >Number of underground floors
 _5
 >Elevator starting floor, comprised in the building floors
-_49
+_24
 >Maximum people load of the elevator, at least one person
 _2
 >People waiting, at least 5, (_waitingFloor, destinationFloor), comprised in the building floors, different from one another
-_45, -3
-_33, 34
+_19, -3
+_0, 22
 _20, 12
-_20, 25
-_20, 25
+_20, 23
+_20, -5
 >People already on the elevator,at least 3, (_destinationFloor), comprised in the building floors, different from the elevator starting floor
 _-3
 _-4
-_43
+_1

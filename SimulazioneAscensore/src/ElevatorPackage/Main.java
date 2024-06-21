@@ -76,7 +76,7 @@ public class Main {
                     System.out.println("An error occurred, during the reading of the save "+e.getMessage());
                     simulator = manualStartUp();
                 }
-                simulator = SimulatorFileUtils.savedStartUp();
+                //simulator = SimulatorFileUtils.savedStartUp();
                 if(simulator==null){
                     simulator = manualStartUp();
                 }
